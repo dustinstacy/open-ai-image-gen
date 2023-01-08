@@ -17,26 +17,29 @@ app.use(express.json());
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Hello from pAInt",
+    message: "Hello from pAInter",
   });
-  console.log(req, res);
 });
 
 app.post("/", async (req, res) => {
-  const prompt = req.body.prompt;
-
   try {
+    const prompt = req.body.prompt;
+
     const response = await openai.createImage({
       prompt: "a white siamese cat",
       n: 1,
       size: "1024x1024",
     });
+
+    image_url = response.data.data[0].url;
+
+    res.status(200).send({
+      bot: response.data.choices[0].text,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({ error });
   }
-
-  image_url = response.data.data[0].url;
 });
 
 app.listen(5000, () => console.log("Server is running on port http://localhost:5000"));
