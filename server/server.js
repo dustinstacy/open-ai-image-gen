@@ -5,8 +5,10 @@ import { Configuration, OpenAIApi } from "openai";
 
 dotenv.config();
 
+console.log(process.env.OPENAI_API_KEY);
+
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPEN_AI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -26,15 +28,13 @@ app.post("/", async (req, res) => {
     const prompt = req.body.prompt;
 
     const response = await openai.createImage({
-      prompt: "a white siamese cat",
-      n: 1,
-      size: "1024x1024",
+      prompt: `${prompt}`,
+      n: 4,
+      size: "512x512",
     });
 
-    image_url = response.data.data[0].url;
-
     res.status(200).send({
-      bot: response.data.choices[0].text,
+      images: response.data,
     });
   } catch (error) {
     console.log(error);
