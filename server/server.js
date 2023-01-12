@@ -26,11 +26,13 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
+    const count = parseInt(req.body.count);
+    const size = req.body.size;
 
     const response = await openai.createImage({
-      prompt: `${prompt}`,
-      n: 4,
-      size: "512x512",
+      prompt: prompt,
+      n: count,
+      size: size,
     });
 
     res.status(200).send({

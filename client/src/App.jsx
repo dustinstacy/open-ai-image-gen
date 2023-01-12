@@ -1,10 +1,11 @@
 import './App.css'
-import Form from './components/Form';
+import { NavBar, Form } from './components';
 
 function App() {
 
   return (
     <div className="App">
+      <NavBar />
       <Form />
     </div>
   )

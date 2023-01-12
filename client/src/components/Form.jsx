@@ -2,14 +2,29 @@ import { useState } from "react";
 import  './Form.css'
 
 const Form = () => {
-    const [inputs, setInputs] = useState('')
+    const [inputs, setInputs] = useState({
+        prompt: '',
+        count: 1,
+        size: "1",
+    })
     const [data, setData] = useState({})
     const [imageRetrieved, setImageRetrieved] = useState(false)
 
+    const handleFormFieldChange = (fieldName, e) => {
+        setInputs({ ...inputs, [fieldName]: e.target.value })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (inputs.size === "1") {
+            inputs.size = "256x256";
+        } else if (inputs.size === "2") {
+            inputs.size = "512x512";
+        } else if (inputs.size === "3") {
+            inputs.size = "1024x1024";
+        }
         setInputs(inputs);
-        console.log(inputs);
 
         const response = await fetch("https://aimage-max1.onrender.com", {
             method: "POST",
@@ -17,7 +32,9 @@ const Form = () => {
             "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                prompt: inputs,
+                prompt: inputs.prompt,
+                count: inputs.count,
+                size: inputs.size,
             })
         });
 
@@ -35,23 +52,60 @@ const Form = () => {
     }
 
     return (
-        <div className="form">
+        <div className="custom">
             <div className="image__container">
                 { imageRetrieved && (
                     data.map((src, idx) => (
-                        <img key={src + idx} src={src.url} alt={inputs} />
+                        <img key={src + idx} src={src.url} alt={inputs.prompt} />
                     )
                 ))}
             </div>
-            <form onSubmit={handleSubmit}>
+
+            <form className="form" onSubmit={handleSubmit}>
                 <label>Enter your prompt:
-                <input
-                    type="text"
-                    onChange={(e) => setInputs(e.target.value)}
+                    <input
+                        className="prompt"
+                        type="text"
+                        onChange={(e) => handleFormFieldChange('prompt', e)}
                     />
-                <button type="submit">Submit</button>
                 </label>
+                <label># of results:
+                    <input
+                        className="count"
+                        type='number'
+                        step="1"
+                        min='1'
+                        max='4'
+                        defaultValue='1'
+                        onChange={(e) => handleFormFieldChange('count', e)}
+                    />
+                </label>
+                <label>Size:
+                    <div className="size_div">
+                        <input
+                            className="size"
+                            type='range'
+                            min='1'
+                            max='3'
+                            defaultValue='1'
+                            list="sizes"
+                            onChange={(e) => handleFormFieldChange('size', e)}
+                        />
+                        <datalist id='sizes'>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </datalist>
+                        <span>
+                            <p>SM</p>
+                            <p>MED</p>
+                            <p>LG</p>
+                        </span>
+                    </div>
+                </label>
+                <button className="btn__generate" type="submit">Generate</button>
             </form>
+
         </div>
     )
 }
