@@ -9,6 +9,7 @@ const Form = () => {
     })
     const [data, setData] = useState({})
     const [imageRetrieved, setImageRetrieved] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleFormFieldChange = (fieldName, e) => {
         setInputs({ ...inputs, [fieldName]: e.target.value })
@@ -16,6 +17,8 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setImageRetrieved(false);
+        setIsLoading(true);
 
         if (inputs.size === "1") {
             inputs.size = "256x256";
@@ -44,6 +47,7 @@ const Form = () => {
             const data = await response.json();
             setData(data.images.data)
             setImageRetrieved(true);
+            setIsLoading(false);
 
         } else {
             const err = await response.text();
@@ -54,6 +58,9 @@ const Form = () => {
     return (
         <div className="custom">
             <div className="image__container">
+                {isLoading && (
+                    <div>Loading...</div>
+                )}
                 { imageRetrieved && (
                     data.map((src, idx) => (
                         <img key={src + idx} src={src.url} alt={inputs.prompt} />
