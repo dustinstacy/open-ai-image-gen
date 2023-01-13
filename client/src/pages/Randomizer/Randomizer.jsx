@@ -1,10 +1,10 @@
 import React from 'react'
-import { NavBar } from '../components'
+import { NavBar } from '../../components'
 
 const Randomizer = () => {
   return (
-    <NavBar />
-  )
+      <NavBar />
+      )
 }
 
 export default Randomizer

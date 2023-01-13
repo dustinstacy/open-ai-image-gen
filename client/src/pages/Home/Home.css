@@ -1,0 +1,36 @@
+.nav__cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 80vh;
+}
+
+.nav__card {
+    display: flex;
+    flex-direction: column;
+    width: 21.5vw;
+    height: 60vh;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.nav__img {
+    border-radius: 10px;
+    width: 20vw;
+}
+
+.nav__desc {
+    height: 4vw;
+    width: 20.75vw;
+    border-radius: 10px;
+    margin-left: .75vw;
+    margin-top: -2vh;
+    z-index: 2;
+    position: absolute;
+    text-align: center;
+    line-height: 4rem;
+}
+
