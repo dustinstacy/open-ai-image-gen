@@ -1,10 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CustomPrompt, PromptBuilder, Randomizer, Home } from './pages';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/prompt-builder" element={<PromptBuilder />} />
+        <Route path="/randomizer" element={<Randomizer />} />
+        <Route path="/custom-prompt" element={<CustomPrompt />} />
+      </Routes>
+    </Router>
   </React.StrictMode>,
 )
