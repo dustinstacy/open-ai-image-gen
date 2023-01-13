@@ -1,7 +1,8 @@
 import { useState } from "react";
-import  './Form.css'
+import { NavBar } from "../../components";
+import  './CustomPrompt.css'
 
-const Form = () => {
+const CustomPrompt = () => {
     const [inputs, setInputs] = useState({
         prompt: '',
         count: 1,
@@ -56,6 +57,8 @@ const Form = () => {
     }
 
     return (
+        <>
+        <NavBar />
         <div className="custom">
             <div className="image__container">
                 {isLoading && (
@@ -113,8 +116,9 @@ const Form = () => {
                 <button className="btn__generate" type="submit">Generate</button>
             </form>
 
-        </div>
+            </div>
+        </>
     )
 }
 
-export default Form;
+export default CustomPrompt;
