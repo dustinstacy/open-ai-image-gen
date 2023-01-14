@@ -42,8 +42,6 @@ const CustomPrompt = () => {
             })
         });
 
-        console.log(inputs);
-
         if (response.ok) {
             const data = await response.json();
             setData(data.images.data)
@@ -57,9 +55,9 @@ const CustomPrompt = () => {
     }
 
     return (
-        <>
-        <NavBar />
-        <div className="custom">
+        <div className="container">
+            <NavBar />
+
             <div className="image__container">
                 {isLoading && (
                     <div>Loading...</div>
@@ -116,8 +114,7 @@ const CustomPrompt = () => {
                 <button className="btn__generate" type="submit">Generate</button>
             </form>
 
-            </div>
-        </>
+        </div>
     )
 }
 

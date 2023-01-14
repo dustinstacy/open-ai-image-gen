@@ -5,36 +5,50 @@
   font-weight: 400;
   text-align: center;
 
-  width: 100%;
-  height: 100%;
+  width: 100dvw;
+  height: 100dvh;
   margin: 0 auto;
 
   color: rgba(0, 0, 0, 0.87);
   background-color: #ebe1e1;
+
 }
 
 a {
-  font-weight: 700;
-  color: #ce2020;
+  font-weight: 500;
+  color:rgb(216, 89, 5);
   text-decoration: none;
 }
 
 a:hover {
-  color:#661010;
+  color:#00165f;
 }
 
 button {
   border-radius: 8px;
-  border: 2px solid rgb(119, 117, 117);
+  border: 2px solid #00165f;
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #aaa6a6;
+  background-color: rgb(216, 89, 5);
+  color: rgb(249,2492,249);
   cursor: pointer;
   transition: border-color 0.5s;
 }
 
 button:hover {
-  border-color: #661010;
+  border-color:rgb(247, 101, 4);
+  color: #00165f;
+  background-color: white;
+  box-shadow: rgba(2, 2, 172, 0.2) 0px 7px 29px 0px;
+}
+
+.container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 99vh;
 }

@@ -2,12 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 import { navlinks } from '../constants'
+import { logo } from '../assets';
 import './NavBar.css'
 
 const NavBar = () => {
   return (
     <div className='navbar'>
-      <p className='logo'>Logo</p>
+      <img src={logo} alt="logo"/>
       <div className='nav__links'>
         {navlinks.map((link) => (
           <NavLink

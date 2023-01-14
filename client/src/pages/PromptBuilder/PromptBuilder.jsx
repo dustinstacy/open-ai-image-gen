@@ -1,9 +1,13 @@
 import React from 'react'
 import NavBar from '../../components/NavBar'
 
+import './PromptBuilder.css'
+
 const PromptBuilder = () => {
   return (
-    <NavBar />
+    <div className='container'>
+      <NavBar />
+    </div>
   )
 }
 
