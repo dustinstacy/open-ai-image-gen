@@ -1,15 +1,15 @@
 .nav__cards{
+    width: 80%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    height: 80vh;
 }
 
 .nav__card {
     display: flex;
     flex-direction: column;
-    width: 21.5vw;
+    width: 22vw;
     height: 60vh;
     align-items: center;
     background-color: white;
@@ -20,6 +20,7 @@
 .nav__img {
     border-radius: 10px;
     width: 20vw;
+    border: 1px solid rgb(207, 3, 3);
 }
 
 .nav__desc {

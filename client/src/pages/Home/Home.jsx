@@ -19,7 +19,7 @@ const NavCard = ({ link }) => (
 const Home = () => {
 
   return (
-    <div className='home'>
+    <div className='container'>
       <NavBar />
       <div className='nav__cards'>
         {navlinks.map((link) => {
