@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavBar } from "../../components";
+import { Loader, NavBar } from "../../components";
 import  './CustomPrompt.css'
 
 const CustomPrompt = () => {
@@ -59,9 +59,7 @@ const CustomPrompt = () => {
             <NavBar />
 
             <div className="image__container">
-                {isLoading && (
-                    <div>Loading...</div>
-                )}
+                {isLoading && <Loader />}
                 { imageRetrieved && (
                     data.map((src, idx) => (
                         <img key={src + idx} src={src.url} alt={inputs.prompt} />

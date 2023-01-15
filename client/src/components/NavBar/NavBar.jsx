@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-import { navlinks } from '../constants'
-import { logo } from '../assets';
+import { navlinks } from '../../constants'
+import { logo } from '../../assets';
 import './NavBar.css'
 
 const NavBar = () => {
