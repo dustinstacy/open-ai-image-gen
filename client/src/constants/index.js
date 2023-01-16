@@ -213,3 +213,14 @@ export const media = [
     description: "Think Alladin, Lion King, Jungle Book",
   },
 ];
+
+export const categories = [
+  "Lighting",
+  "Energies",
+  "Aesthetics",
+  "CameraSettings",
+  "Artists",
+  "Structure",
+  "Filters",
+  "Media",
+];
