@@ -1,4 +1,4 @@
-import { buildingBlocks, neondice, wrench } from "../assets";
+import { backlight, blacklight, buildingBlocks, candlelight, neondice, studiolight, wrench } from "../assets";
 
 export const navlinks = [
   {
@@ -27,23 +27,23 @@ export const navlinks = [
 
 export const lighting = [
   {
-    name: "blacklight",
-    imgUrl: "",
+    name: "Blacklight",
+    imgUrl: blacklight,
     description: "Trippy",
   },
   {
-    name: "backlight",
-    imgUrl: "",
+    name: "Backlight",
+    imgUrl: backlight,
     description: "Light source behind subject casting a glow",
   },
   {
-    name: "studio lighting",
-    imgUrl: "",
+    name: "Studio lighting",
+    imgUrl: studiolight,
     description: "Professional style lighting",
   },
   {
-    name: "candlelight",
-    imgUrl: "",
+    name: "Candlelight",
+    imgUrl: candlelight,
     description: "Faint glimmer of warm light",
   },
 ];

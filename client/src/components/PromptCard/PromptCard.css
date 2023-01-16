@@ -1,0 +1,36 @@
+.prompt__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 45vh;
+    width: 300px;
+    border: 4px solid #00165f;
+    margin: 4rem 1.5rem 0 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(255, 115, 21);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+.prompt__card__title {
+    margin-top: 1rem;
+    color: white;
+}
+
+.prompt__card__image {
+    height: 300px;
+    width: 300px;
+    margin-top: 0;
+    border: 2px solid #00165f;
+}
+
+.prompt__card__text {
+    height:80px;
+    width: 10vw;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -.5rem;
+    color: white;
+}
