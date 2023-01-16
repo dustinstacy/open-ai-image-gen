@@ -4,7 +4,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { NavBar, PromptCard } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure, filters } from '../../constants';
 
-import 'react-tabs/style/react-tabs.css';
 import './PromptBuilder.css'
 
 const handleClick = (e) => {
@@ -39,6 +38,10 @@ const PromptBuilder = () => {
             ))}
           </TabPanel>
         ))}
+        <div className='prompt__collector'>
+          <h2>Prompt Collector</h2>
+          <button type="submit">Submit</button>
+        </div>
       </Tabs>
     </div>
   )
