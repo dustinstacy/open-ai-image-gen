@@ -16,6 +16,7 @@
 .prompt__card__title {
     margin-top: 1rem;
     color: white;
+    pointer-events: none;
 }
 
 .prompt__card__image {
@@ -23,14 +24,20 @@
     width: 300px;
     margin-top: 0;
     border: 2px solid #00165f;
+    pointer-events: none;
 }
 
 .prompt__card__text {
     height:80px;
-    width: 10vw;
+    width: 14vw;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
     margin-top: -.5rem;
     color: white;
+    pointer-events: none;
+}
+
+.active__prompt {
+    box-shadow: 6px 6px 6px rgb(255, 115, 21), -6px -6px 6px rgb(255, 115, 21), 6px -6px 6px rgb(255, 115, 21), -6px 6px 6px rgb(255, 115, 21);
 }
