@@ -11,9 +11,24 @@ const PromptBuilder = () => {
   const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
 
   const handleClick = (prompt, e) => {
-    const value = prompt.name;
-    setSelectedPrompts([...selectedPrompts, value]);
-    e.target.classList.add('active__prompt');
+    if (selectedPrompts.includes(prompt)) {
+      setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt));
+      const activePrompt = document.getElementById(prompt)
+      activePrompt.classList.remove('active__prompt');
+    } else if(selectedPrompts.includes(prompt.name)) {
+      promptArrays.forEach((category) => {
+        category.forEach((i) => {
+          if (i === prompt) {
+            e.target.classList.remove('active__prompt')
+            setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.name));
+          }
+        })
+      })
+    } else {
+      const value = prompt.name;
+      setSelectedPrompts([...selectedPrompts, value]);
+      e.target.classList.add('active__prompt');
+    }
   }
 
   return (
@@ -31,6 +46,7 @@ const PromptBuilder = () => {
             {category.map((prompt) => (
                 <PromptCard
                   key={prompt.name}
+                  id={prompt.name}
                   title={prompt.name}
                   image={prompt.imgUrl}
                   details={prompt.description}
@@ -41,10 +57,11 @@ const PromptBuilder = () => {
         ))}
         <div className='prompt__collector'>
           <h2>Prompt Collector</h2>
-          <ul>
+          <ul className='selected__prompts'>
           {selectedPrompts?.map((prompt) => (
-            <li key={prompt}>
+            <li key={prompt} className="prompt">
               {prompt}
+              <span className='delete' onClick={(e) => handleClick(prompt, e)}>X</span>
             </li>
           ))}
           </ul>

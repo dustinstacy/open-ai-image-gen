@@ -77,12 +77,52 @@
 .prompt__collector {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     background: #fff;
     width: 20vw;
     margin-left: 2rem;
     border: 1px solid #aaa;
     border-radius: 10px;
     padding: 2rem 0;
+}
+
+.selected__prompts {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    margin-right: 1.5rem;
+    height: 100%;
+    width: 100%;
+}
+
+.prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style:none;
+    height: 4vh;
+    width: 8vw;
+    margin: .5rem;
+    border: 1px solid #00165f;
+}
+
+.delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1vw;
+    height: 2vh;
+    font-size: 18px;
+    font-weight: bold;
+    color: #00165f;
+    border: 2px solid #00165f;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.delete:hover {
+    border: 2px solid rgb(255, 115, 21);
+    color:rgb(255, 115, 21)
 }
