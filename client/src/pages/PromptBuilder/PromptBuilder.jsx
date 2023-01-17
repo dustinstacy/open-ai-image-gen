@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { NavBar, PromptCard } from '../../components'
-import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure, filters } from '../../constants';
+import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
 
 import './PromptBuilder.css'
 
-const handleClick = (e) => {
-  console.log(e.target);
-}
-
-
 const PromptBuilder = () => {
+  const [selectedPrompts, setSelectedPrompts] = useState([])
+  const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
 
-  const promptArrays = [lighting, energies, cameraSettings, media, artists, aesthetics, structure, filters];
+  const handleClick = (prompt, e) => {
+    const value = prompt.name;
+    setSelectedPrompts([...selectedPrompts, value]);
+    e.target.classList.add('active__prompt');
+  }
 
   return (
     <div className='container'>
@@ -33,13 +34,20 @@ const PromptBuilder = () => {
                   title={prompt.name}
                   image={prompt.imgUrl}
                   details={prompt.description}
-                  handleClick={(e) => handleClick(e)}
+                  handleClick={(e) => handleClick(prompt, e)}
                 />
             ))}
           </TabPanel>
         ))}
         <div className='prompt__collector'>
           <h2>Prompt Collector</h2>
+          <ul>
+          {selectedPrompts?.map((prompt) => (
+            <li key={prompt}>
+              {prompt}
+            </li>
+          ))}
+          </ul>
           <button type="submit">Submit</button>
         </div>
       </Tabs>

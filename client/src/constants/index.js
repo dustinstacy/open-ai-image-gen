@@ -1,4 +1,36 @@
-import { backlight, blacklight, buildingBlocks, candlelight, neondice, studiolight, wrench } from "../assets";
+import {
+  backlight,
+  blacklight,
+  buildingBlocks,
+  candlelight,
+  neondice,
+  studiolight,
+  wrench,
+  threeDRender,
+  serene,
+  bokeh,
+  closeup,
+  cybernetic,
+  gloomy,
+  gothic,
+  longshot,
+  ominous,
+  overhead,
+  postapocalyptic,
+  spirited,
+  vaporwave,
+  dali,
+  experimental,
+  monumental,
+  organic,
+  giger,
+  steadman,
+  frazetta,
+  etching,
+  disney,
+  elaborate,
+  airbrush,
+} from "../assets";
 
 export const navlinks = [
   {
@@ -51,22 +83,22 @@ export const lighting = [
 export const energies = [
   {
     name: "spirited",
-    imgUrl: "",
+    imgUrl: spirited,
     description: "Full of energy, enthusiasm, and determination",
   },
   {
     name: "serene",
-    imgUrl: "",
+    imgUrl: serene,
     description: "Calm, peaceful, and untroubled",
   },
   {
     name: "gloomy",
-    imgUrl: "",
+    imgUrl: gloomy,
     description: "Distressed or pessimistic",
   },
   {
     name: "ominous",
-    imgUrl: "",
+    imgUrl: ominous,
     description: "Giving the impression that something bad is going to happen",
   },
 ];
@@ -74,22 +106,22 @@ export const energies = [
 export const aesthetics = [
   {
     name: "vaporwave",
-    imgUrl: "",
+    imgUrl: vaporwave,
     description: "Geometric and futuristic",
   },
   {
     name: "post-apocalyptic",
-    imgUrl: "",
+    imgUrl: postapocalyptic,
     description: "Desolate and bleak",
   },
   {
     name: "gothic",
-    imgUrl: "",
+    imgUrl: gothic,
     description: "Sharp architecture and dark tones",
   },
   {
     name: "cybernetic",
-    imgUrl: "",
+    imgUrl: cybernetic,
     description: "Futuristic biomechanical integration ",
   },
 ];
@@ -97,22 +129,22 @@ export const aesthetics = [
 export const cameraSettings = [
   {
     name: "close-up",
-    imgUrl: "",
+    imgUrl: closeup,
     description: "Tight camera frame",
   },
   {
     name: "long shot",
-    imgUrl: "",
+    imgUrl: longshot,
     description: "Wide camera frame",
   },
   {
     name: "overhead",
-    imgUrl: "",
+    imgUrl: overhead,
     description: "View from above",
   },
   {
     name: "bokeh",
-    imgUrl: "",
+    imgUrl: bokeh,
     description: "Close up out-of-focus background",
   },
 ];
@@ -120,22 +152,22 @@ export const cameraSettings = [
 export const artists = [
   {
     name: "Ralph Steadman",
-    imgUrl: "",
+    imgUrl: steadman,
     description: "",
   },
   {
     name: "Salvador Dali",
-    imgUrl: "",
+    imgUrl: dali,
     description: "",
   },
   {
     name: "H.R. Giger",
-    imgUrl: "",
+    imgUrl: giger,
     description: "",
   },
   {
-    name: "Esao",
-    imgUrl: "",
+    name: "Frank Frazetta",
+    imgUrl: frazetta,
     description: "",
   },
 ];
@@ -143,84 +175,47 @@ export const artists = [
 export const structure = [
   {
     name: "monumental",
-    imgUrl: "",
+    imgUrl: monumental,
     description: "Of great size",
   },
   {
     name: "organic",
-    imgUrl: "",
+    imgUrl: organic,
     description: "Derived from living matter",
   },
   {
     name: "elaborate",
-    imgUrl: "",
+    imgUrl: elaborate,
     description: "Many arranged parts or details",
   },
   {
     name: "experimental",
-    imgUrl: "",
+    imgUrl: experimental,
     description: "New and innovative",
-  },
-];
-
-export const filters = [
-  {
-    name: "CCTV",
-    imgUrl: "",
-    description: "Security camera footage",
-  },
-  {
-    name: "double exposure",
-    imgUrl: "",
-    description: "Combine two subjects",
-  },
-  {
-    name: "infrared",
-    imgUrl: "",
-    description: "Heat Sensor or Thermal imaging",
-  },
-  {
-    name: "colour splash",
-    imgUrl: "",
-    description: "One color in black and white image",
   },
 ];
 
 export const media = [
   {
     name: "etching",
-    imgUrl: "",
+    imgUrl: etching,
     description: "Finely carved text or design",
   },
   {
     name: "airbrush",
-    imgUrl: "",
+    imgUrl: airbrush,
     description: "Air propelled paint with fine condensed splatter like design",
   },
   {
     name: "3d render",
-    imgUrl: "",
+    imgUrl: threeDRender,
     description: "3d graphical representation of subject",
   },
   {
-    name: "tattoo",
-    imgUrl: "",
-    description: "Exactly what it sounds like",
-  },
-  {
     name: "1990s Disney",
-    imgUrl: "",
+    imgUrl: disney,
     description: "Think Alladin, Lion King, Jungle Book",
   },
 ];
 
-export const categories = [
-  "Lighting",
-  "Energies",
-  "Aesthetics",
-  "CameraSettings",
-  "Artists",
-  "Structure",
-  "Filters",
-  "Media",
-];
+export const categories = ["Lighting", "Energies", "Aesthetics", "CameraSettings", "Artists", "Structure", "Media"];
