@@ -82,22 +82,22 @@ export const lighting = [
 
 export const energies = [
   {
-    name: "spirited",
+    name: "Spirited",
     imgUrl: spirited,
     description: "Full of energy, enthusiasm, and determination",
   },
   {
-    name: "serene",
+    name: "Serene",
     imgUrl: serene,
     description: "Calm, peaceful, and untroubled",
   },
   {
-    name: "gloomy",
+    name: "Gloomy",
     imgUrl: gloomy,
     description: "Distressed or pessimistic",
   },
   {
-    name: "ominous",
+    name: "Ominous",
     imgUrl: ominous,
     description: "Giving the impression that something bad is going to happen",
   },
@@ -105,22 +105,22 @@ export const energies = [
 
 export const aesthetics = [
   {
-    name: "vaporwave",
+    name: "Vaporwave",
     imgUrl: vaporwave,
     description: "Geometric and futuristic",
   },
   {
-    name: "post-apocalyptic",
+    name: "Post-apocalyptic",
     imgUrl: postapocalyptic,
     description: "Desolate and bleak",
   },
   {
-    name: "gothic",
+    name: "Gothic",
     imgUrl: gothic,
     description: "Sharp architecture and dark tones",
   },
   {
-    name: "cybernetic",
+    name: "Cybernetic",
     imgUrl: cybernetic,
     description: "Futuristic biomechanical integration ",
   },
@@ -128,22 +128,22 @@ export const aesthetics = [
 
 export const cameraSettings = [
   {
-    name: "close-up",
+    name: "Close-up",
     imgUrl: closeup,
     description: "Tight camera frame",
   },
   {
-    name: "long shot",
+    name: "Long shot",
     imgUrl: longshot,
     description: "Wide camera frame",
   },
   {
-    name: "overhead",
+    name: "Overhead",
     imgUrl: overhead,
     description: "View from above",
   },
   {
-    name: "bokeh",
+    name: "Bokeh",
     imgUrl: bokeh,
     description: "Close up out-of-focus background",
   },
@@ -174,22 +174,22 @@ export const artists = [
 
 export const structure = [
   {
-    name: "monumental",
+    name: "Monumental",
     imgUrl: monumental,
     description: "Of great size",
   },
   {
-    name: "organic",
+    name: "Organic",
     imgUrl: organic,
     description: "Derived from living matter",
   },
   {
-    name: "elaborate",
+    name: "Elaborate",
     imgUrl: elaborate,
     description: "Many arranged parts or details",
   },
   {
-    name: "experimental",
+    name: "Experimental",
     imgUrl: experimental,
     description: "New and innovative",
   },
@@ -197,17 +197,17 @@ export const structure = [
 
 export const media = [
   {
-    name: "etching",
+    name: "Etching",
     imgUrl: etching,
     description: "Finely carved text or design",
   },
   {
-    name: "airbrush",
+    name: "Airbrush",
     imgUrl: airbrush,
     description: "Air propelled paint with fine condensed splatter like design",
   },
   {
-    name: "3d render",
+    name: "3d Render",
     imgUrl: threeDRender,
     description: "3d graphical representation of subject",
   },
