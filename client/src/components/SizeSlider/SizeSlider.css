@@ -1,0 +1,18 @@
+.size_div {
+    display: flex;
+    flex-direction: column;
+    width: 5vw;
+}
+
+.size {
+    margin-left: 1vw;
+}
+
+span {
+    display: flex;
+    font-size: .75rem;
+}
+
+p {
+    margin: 0 0 0 0.65vw;
+}
