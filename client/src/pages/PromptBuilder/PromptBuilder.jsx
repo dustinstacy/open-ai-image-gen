@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useNavigate } from 'react-router-dom';
 
-import { NavBar, PromptCard } from '../../components'
+import { NavBar, PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
-
+import { sizeConversion, fetchResults } from '../../utils';
 import './PromptBuilder.css'
 
 const PromptBuilder = () => {
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    prompt: '',
+    count: 1,
+    size: "1",
+  })
+  const [data, setData] = useState({})
+  const [imageRetrieved, setImageRetrieved] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedPrompts, setSelectedPrompts] = useState([])
   const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
 
@@ -28,12 +38,47 @@ const PromptBuilder = () => {
       const value = prompt.name;
       setSelectedPrompts([...selectedPrompts, value]);
       e.target.classList.add('active__prompt');
+      const promptBuild = selectedPrompts.join(" ")
+      setInputs({ ...inputs, prompt: promptBuild })
     }
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setImageRetrieved(false);
+    setIsLoading(true);
+    sizeConversion({ inputs })
+    fetchResults({ inputs, setData, setImageRetrieved, setIsLoading });
+  }
+
+  const reset = (e) => {
+    e.preventDefault();
+    setImageRetrieved(false)
+  }
+
 
   return (
     <div className='container'>
       <NavBar />
+
+      <div className="image__container">
+        {isLoading && <Loader />}
+        {imageRetrieved && (
+          <div className='results'>
+            <div className='images'>
+              {data.map((src, idx) => (
+                <img key={src + idx} src={src.url} alt={inputs.prompt} />
+              ))}
+            </div>
+            <div>
+              <button type="button" onClick={(e) => reset(e)}>Try Again?</button>
+            </div>
+          </div>
+        )}
+      </div>
+
+
+      {!imageRetrieved && !isLoading && (
       <Tabs>
         <TabList>
           {categories.map((category, i) => (
@@ -65,9 +110,14 @@ const PromptBuilder = () => {
             </li>
           ))}
           </ul>
-          <button type="submit">Submit</button>
+          <div className='options'>
+            <ResultsCount setInputs={setInputs} inputs={inputs} />
+            <SizeSlider setInputs={setInputs} inputs={inputs} />
+          </div>
+          <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
         </div>
-      </Tabs>
+        </Tabs>
+      )}
     </div>
   )
 }

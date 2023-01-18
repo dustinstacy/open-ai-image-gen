@@ -5,6 +5,7 @@
     width: 100%;
     justify-content: flex-start;
     padding-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 .react-tabs__tab-list {
@@ -125,4 +126,41 @@
 .delete:hover {
     border: 2px solid rgb(255, 115, 21);
     color:rgb(255, 115, 21)
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.image__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60vh;
+    width: 60vw;
+}
+
+.images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+img {
+    width: 22.5vw;
+    height: 22.5vw;
+    display: flex;
+    margin: 1rem 1rem;
+
 }
