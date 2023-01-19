@@ -1,9 +1,8 @@
 import React from 'react'
-import { handleFormFieldChange } from '../../utils'
 
 import './SizeSlider.css'
 
-const SizeSlider = ({ setInputs, inputs }) => {
+const SizeSlider = ({handleChange}) => {
   return (
     <label>Size:
         <div className="size_div">
@@ -14,7 +13,7 @@ const SizeSlider = ({ setInputs, inputs }) => {
                 max='3'
                 defaultValue='1'
                 list="sizes"
-                onChange={(e) => handleFormFieldChange({ setInputs: setInputs, inputs: inputs }, 'size', e)}
+                onChange={(e) => handleChange('size', e)}
             />
             <datalist id='sizes'>
                 <option>1</option>

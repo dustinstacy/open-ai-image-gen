@@ -5,12 +5,11 @@
     display: flex;
     align-items: center;
     background-color: white;
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
 
-.nav__link {
-    margin: 0 1.5rem;
+img {
     cursor: pointer;
 }
 
@@ -22,6 +21,11 @@
     margin-right: 2rem;
 }
 
+.nav__link {
+    margin: 0 1.5rem;
+    cursor: pointer;
+}
+
 .active {
-    color: #661010;
+    color: #00165f;
 }
