@@ -26,11 +26,6 @@ img {
     margin-bottom: 8rem;
 }
 
-.btn__generate {
-    height: auto;
-    margin-left: 3vw;
-}
-
 .prompt__input {
     margin: 0 1rem;
     width: 30vw;
@@ -39,3 +34,9 @@ img {
     border-radius: 5px;
     padding-left: 1rem;
 }
+
+.btn__generate {
+    height: auto;
+    margin-left: 3vw;
+}
+

@@ -32,6 +32,6 @@ export const sizeConversion = ({ inputs }) => {
   }
 };
 
-export const handleFormFieldChange = ({ setInputs: setInputs, inputs: inputs }, fieldName, e) => {
-  setInputs({ ...inputs, [fieldName]: e.target.value });
+export const integerConversion = ({ inputs }) => {
+  inputs.count = parseInt(inputs.count);
 };

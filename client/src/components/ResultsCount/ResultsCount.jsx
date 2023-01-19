@@ -1,9 +1,8 @@
 import React from 'react'
-import { handleFormFieldChange } from '../../utils';
 
 import "./ResultsCount.css";
 
-const ResultsCount = ({ inputs, setInputs }) => {
+const ResultsCount = ({ handleChange }) => {
   return (
     <label># of results:
         <input
@@ -13,7 +12,7 @@ const ResultsCount = ({ inputs, setInputs }) => {
             min='1'
             max='4'
             defaultValue='1'
-             onChange={(e) => handleFormFieldChange({ setInputs: setInputs, inputs: inputs }, 'count', e)}
+            onChange={(e) => handleChange('count', e)}
         />
     </label>
   )

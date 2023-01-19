@@ -1,46 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { useNavigate } from 'react-router-dom';
 import { CgCloseR } from 'react-icons/cg';
+import { BsFillPlusSquareFill } from 'react-icons/bs'
 
 import { NavBar, PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
-import { sizeConversion, fetchResults } from '../../utils';
+import { sizeConversion, integerConversion, fetchResults } from '../../utils';
+
 import './PromptBuilder.css'
 
+
 const PromptBuilder = () => {
-  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     prompt: '',
-    count: 1,
+    count:"1",
     size: "1",
   })
-  const [data, setData] = useState({})
-  const [imageRetrieved, setImageRetrieved] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
   const [selectedPrompts, setSelectedPrompts] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [imageRetrieved, setImageRetrieved] = useState(false)
+  const [data, setData] = useState({})
+
   const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
 
+  useEffect(() => {
+    const promptBuild = selectedPrompts.join(" ")
+    setInputs({...inputs, prompt: promptBuild})
+  }, [selectedPrompts])
+
+  const handleFormFieldChange = (fieldName, e) => {
+    setInputs({ ...inputs, [fieldName]: e.target.value });
+    console.log(inputs);
+  };
+
   const handleClick = (prompt, e) => {
+    const activePrompt = document.getElementById(prompt)
+    const value = prompt.name;
+
     if (selectedPrompts.includes(prompt)) {
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt));
-      const activePrompt = document.getElementById(prompt)
       activePrompt.classList.remove('active__prompt');
     } else if(selectedPrompts.includes(prompt.name)) {
-      promptArrays.forEach((category) => {
-        category.forEach((i) => {
-          if (i === prompt) {
-            e.target.classList.remove('active__prompt')
-            setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.name));
-          }
-        })
-      })
+      e.target.classList.remove('active__prompt')
+      setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.name));
     } else {
-      const value = prompt.name;
-      setSelectedPrompts([...selectedPrompts, value]);
       e.target.classList.add('active__prompt');
-      const promptBuild = selectedPrompts.join(" ")
-      setInputs({ ...inputs, prompt: promptBuild })
+      setSelectedPrompts([...selectedPrompts, value]);
+    }
+  }
+
+  const addCustomPrompt = () => {
+    const customPrompt = document.getElementById('custom__prompt');
+    setSelectedPrompts([...selectedPrompts, customPrompt.value])
+    customPrompt.value = '';
+  }
+
+  const handleEnterKey = (e) => {
+    const customPrompt = document.getElementById('custom__prompt');
+    if (e.key === 'Enter' && customPrompt.value.length > 0) {
+      addCustomPrompt();
     }
   }
 
@@ -48,6 +66,7 @@ const PromptBuilder = () => {
     e.preventDefault();
     setImageRetrieved(false);
     setIsLoading(true);
+    integerConversion({ inputs })
     sizeConversion({ inputs })
     fetchResults({ inputs, setData, setImageRetrieved, setIsLoading });
   }
@@ -95,7 +114,6 @@ const PromptBuilder = () => {
                   id={prompt.name}
                   title={prompt.name}
                   image={prompt.imgUrl}
-                  details={prompt.description}
                   handleClick={(e) => handleClick(prompt, e)}
                 />
             ))}
@@ -111,9 +129,18 @@ const PromptBuilder = () => {
             </li>
           ))}
           </ul>
-          <div className='options'>
-            <ResultsCount setInputs={setInputs} inputs={inputs} />
-            <SizeSlider setInputs={setInputs} inputs={inputs} />
+            <div className='options'>
+            <label>Add your own prompt:
+              <input
+                className="add__prompt"
+                type="text"
+                id="custom__prompt"
+                onKeyDown={(e) => handleEnterKey(e)}
+                />
+              <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
+            </label>
+            <ResultsCount handleChange={handleFormFieldChange} />
+            <SizeSlider handleChange={handleFormFieldChange} />
           </div>
           <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
         </div>

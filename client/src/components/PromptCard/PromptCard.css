@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    height: 42.5vh;
     width: 300px;
     border: 4px solid #00165f;
     margin: 4rem 1.5rem 0 1.5rem;
@@ -27,19 +25,6 @@
     margin-top: -.5rem;
     border: 2px solid #00165f;
     pointer-events: none;
-}
-
-.prompt__card__text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80px;
-    width: 14vw;
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    pointer-events: none;
-    margin-top: -1rem;
 }
 
 .active__prompt {
