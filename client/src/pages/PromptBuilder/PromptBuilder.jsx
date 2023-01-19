@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useNavigate } from 'react-router-dom';
+import { CgCloseR } from 'react-icons/cg';
 
 import { NavBar, PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
@@ -106,7 +107,7 @@ const PromptBuilder = () => {
           {selectedPrompts?.map((prompt) => (
             <li key={prompt} className="prompt">
               {prompt}
-              <span className='delete' onClick={(e) => handleClick(prompt, e)}>X</span>
+              <CgCloseR className='delete' onClick={(e) => handleClick(prompt, e)} />
             </li>
           ))}
           </ul>

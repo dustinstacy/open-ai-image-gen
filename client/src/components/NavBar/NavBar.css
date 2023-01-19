@@ -25,3 +25,7 @@
 .active {
     color: #661010;
 }
+
+img {
+    cursor: pointer;
+}

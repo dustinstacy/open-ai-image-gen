@@ -1,14 +1,16 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { navlinks } from '../../constants'
 import { logo } from '../../assets';
 import './NavBar.css'
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='navbar'>
-      <img src={logo} alt="logo"/>
+      <img src={logo} alt="logo" onClick={() => navigate('/')} />
       <div className='nav__links'>
         {navlinks.map((link) => (
           <NavLink

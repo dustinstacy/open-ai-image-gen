@@ -1,0 +1,9 @@
+.reels {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    width: 80vw;
+    border: 2px solid black;
+    margin: 5rem 0;
+}
