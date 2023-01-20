@@ -3,18 +3,16 @@ import { NavBar } from '../../components'
 
 import {lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
 
-import './Randomizer.css'
+import './Randomizer.scss'
 
 const Randomizer = () => {
 
-  const spin = () => {
-
-  }
-
   return (
-    <div className='container'>
+    <div className='page'>
       <NavBar />
-      <button type="button" onClick={() => spin()}>Spin</button>
+      <div className='randomizer__container'>
+        <button type="button" onClick={() => spin()}>Spin</button>
+      </div>
     </div>
       )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import "./ResultsCount.css";
+import "./ResultsCount.scss";
 
 const ResultsCount = ({ handleChange }) => {
   return (

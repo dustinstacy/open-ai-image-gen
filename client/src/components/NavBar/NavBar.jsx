@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { navlinks } from '../../constants'
 import { logo } from '../../assets';
-import './NavBar.css'
+import './NavBar.scss'
 
 const NavBar = () => {
   const navigate = useNavigate();
