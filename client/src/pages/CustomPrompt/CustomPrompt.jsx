@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Loader, NavBar, SizeSlider } from "../../components";
-import ResultsCount from "../../components/ResultsCount/ResultsCount";
+
+import { Loader, NavBar, SizeSlider, ResultsCount } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
-import  './CustomPrompt.css'
+
+import  './CustomPrompt.scss'
 
 const CustomPrompt = () => {
     const [inputs, setInputs] = useState({
@@ -24,14 +25,13 @@ const CustomPrompt = () => {
         setIsLoading(true);
         integerConversion({ inputs })
         sizeConversion({ inputs })
-        console.log(inputs)
         fetchResults({ inputs, setData, setImageRetrieved, setIsLoading });
     }
 
     return (
-        <div className="container">
+        <div className="page">
             <NavBar />
-
+            <div className="page__container">
             <div className="image__container">
                 {isLoading && <Loader />}
                 { imageRetrieved && (
@@ -40,20 +40,20 @@ const CustomPrompt = () => {
                     )
                 ))}
             </div>
-
             <form className="form" onSubmit={handleSubmit}>
-                <label>Enter your prompt:
-                    <input
-                        className="prompt__input"
-                        type="text"
-                        placeholder="What will you discover?"
-                        onChange={(e) => handleFormFieldChange('prompt', e)}
-                    />
-                </label>
+                <div className="prompt__input">
+                <label>Enter your prompt:</label>
+                <input
+                    type="text"
+                    placeholder="What will you discover?"
+                    onChange={(e) => handleFormFieldChange('prompt', e)}
+                />
+                </div>
                 <ResultsCount handleChange={handleFormFieldChange} />
                 <SizeSlider handleChange={handleFormFieldChange} />
                 <button className="btn__generate" type="submit">Generate</button>
-            </form>
+                </form>
+                </div>
 
         </div>
     )

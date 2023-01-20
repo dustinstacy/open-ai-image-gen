@@ -1,13 +1,13 @@
 import React from 'react'
 
-import './SizeSlider.css'
+import './SizeSlider.scss'
 
 const SizeSlider = ({handleChange}) => {
-  return (
-    <label>Size:
-        <div className="size_div">
+    return (
+        <div className="size__div">
+            <label>Size:</label>
             <input
-                className="size"
+                className="slider"
                 type='range'
                 min='1'
                 max='3'
@@ -26,7 +26,6 @@ const SizeSlider = ({handleChange}) => {
                 <p>LG</p>
             </span>
         </div>
-    </label>
   )
 }
 

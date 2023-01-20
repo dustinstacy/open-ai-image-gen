@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { CgCloseR } from 'react-icons/cg';
-import { BsFillPlusSquareFill } from 'react-icons/bs'
 
 import { NavBar, PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
 
-import './PromptBuilder.css'
+import './PromptBuilder.scss'
 
 
 const PromptBuilder = () => {
@@ -78,11 +77,11 @@ const PromptBuilder = () => {
 
 
   return (
-    <div className='container'>
+    <div className='page'>
       <NavBar />
-
+      {isLoading && <Loader />}
+      {imageRetrieved && (
       <div className="image__container">
-        {isLoading && <Loader />}
         {imageRetrieved && (
           <div className='results'>
             <div className='images'>
@@ -95,10 +94,12 @@ const PromptBuilder = () => {
             </div>
           </div>
         )}
-      </div>
+        </div>
+      )}
 
 
       {!imageRetrieved && !isLoading && (
+        <div className='builder__container'>
       <Tabs>
         <TabList>
           {categories.map((category, i) => (
@@ -119,7 +120,8 @@ const PromptBuilder = () => {
             ))}
           </TabPanel>
         ))}
-        <div className='prompt__collector'>
+              </Tabs>
+              <div className='prompt__collector'>
           <h2>Prompt Collector</h2>
           <ul className='selected__prompts'>
           {selectedPrompts?.map((prompt) => (
@@ -130,7 +132,7 @@ const PromptBuilder = () => {
           ))}
           </ul>
             <div className='options'>
-            <label>Add your own prompt:
+            <label>Add your own prompt:</label>
               <input
                 className="add__prompt"
                 type="text"
@@ -138,14 +140,16 @@ const PromptBuilder = () => {
                 onKeyDown={(e) => handleEnterKey(e)}
                 />
               <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
-            </label>
+
             <ResultsCount handleChange={handleFormFieldChange} />
             <SizeSlider handleChange={handleFormFieldChange} />
           </div>
           <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
         </div>
-        </Tabs>
+
+          </div>
       )}
+
     </div>
   )
 }

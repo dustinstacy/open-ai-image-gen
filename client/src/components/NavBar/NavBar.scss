@@ -1,0 +1,34 @@
+.navbar {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: var(--white-color);
+
+    img {
+        cursor: pointer;
+    }
+
+    .nav__links {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 2rem;
+
+        .nav__link {
+            margin: 0 1.5rem;
+            cursor: pointer;
+        }
+
+        .active {
+            color: var(--secondary-color)
+        }
+    }
+}
+
+
+
+
+
+

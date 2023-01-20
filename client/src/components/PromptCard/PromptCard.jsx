@@ -1,12 +1,12 @@
 import React from 'react'
 
-import './PromptCard.css'
+import './PromptCard.scss'
 
 const PromptCard = ({ title, image, handleClick, id}) => {
   return (
     <div className="prompt__card"onClick={handleClick} id={id}>
-      <h4 className='prompt__card__title'>{title}</h4>
-      <img src={image} alt={title} className='prompt__card__image'/>
+      <h4>{title}</h4>
+      <img src={image} alt={title}/>
     </div>
   )
 }
