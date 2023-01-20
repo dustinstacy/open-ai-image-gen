@@ -1,6 +1,8 @@
 import express from "express";
+import bcrypt from "bcryptjs";
 
 import User from "../models/User.js";
+import validateRegisterInput from "../routes/validation/registerValidation.js";
 
 const router = express.Router();
 
@@ -16,9 +18,26 @@ router.get("/test", (req, res) => {
 // @access Public
 router.post("/register", async (req, res) => {
   try {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const existingEmail = await User.findOne({
+      email: new RegExp("^" + req.body.email + "$", "i"),
+    });
+
+    if (existingEmail) {
+      return res.status(400).json({ error: "There is already a user with this email" });
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    console.log(hashedPassword);
+
     const newUser = new User({
       email: req.body.email,
-      //   password: req.body.password,
+      password: hashedPassword,
       name: req.body.name,
     });
 
@@ -27,7 +46,7 @@ router.post("/register", async (req, res) => {
     return res.json(savedUser);
   } catch (error) {
     console.log(error);
-    res.status(500).send(err.message);
+    res.status(500).send(error.message);
   }
 });
 

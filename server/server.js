@@ -15,10 +15,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 const app = express();
 
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
-app.get("/api", async (req, res) => {
+app.get("/", async (req, res) => {
   res.status(200).send({
     message: "We are connected",
   });
