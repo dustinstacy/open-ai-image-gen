@@ -30,8 +30,6 @@ const CustomPrompt = () => {
 
     return (
         <div className="page">
-            <NavBar />
-            <div className="page__container">
             <div className="image__container">
                 {isLoading && <Loader />}
                 { imageRetrieved && (
@@ -51,10 +49,8 @@ const CustomPrompt = () => {
                 </div>
                 <ResultsCount handleChange={handleFormFieldChange} />
                 <SizeSlider handleChange={handleFormFieldChange} />
-                <button className="btn__generate" type="submit">Generate</button>
-                </form>
-                </div>
-
+                <button type="submit">Generate</button>
+            </form>
         </div>
     )
 }

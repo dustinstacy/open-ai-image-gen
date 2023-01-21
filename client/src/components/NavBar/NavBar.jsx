@@ -11,12 +11,12 @@ const NavBar = () => {
   return (
     <div className='navbar'>
       <img src={logo} alt="logo" onClick={() => navigate('/')} />
-      <div className='nav__links'>
+      <div className='navbar__links'>
         {navlinks.map((link) => (
           <NavLink
             key={link.name}
             to={link.link}
-            className="nav__link"
+            className="navbar__link"
           >{link.name}
           </NavLink>
         ))}
