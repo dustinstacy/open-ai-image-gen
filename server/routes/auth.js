@@ -1,8 +1,10 @@
 import express from "express";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import User from "../models/User.js";
 import validateRegisterInput from "../routes/validation/registerValidation.js";
+import requiresAuth from "../middleware/permissions.js";
 
 const router = express.Router();
 
@@ -43,11 +45,68 @@ router.post("/register", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    return res.json(savedUser);
+    const userToReturn = { ...savedUser._doc };
+    delete userToReturn.password;
+
+    return res.json(userToReturn);
   } catch (error) {
     console.log(error);
     res.status(500).send(error.message);
   }
+});
+
+// @route Post /api/auth/login
+// @desc Login user and return an access token
+// @access Public
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({
+      email: new RegExp("^" + req.body.email + "$", "i"),
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: "Invalid login credentials" });
+    }
+
+    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(400).json({ error: "Invalid login credentials" });
+    }
+
+    const payload = { userId: user._id };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("access-token", token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    const userToReturn = { ...user._doc };
+    delete userToReturn.password;
+
+    return res.json({
+      token: token,
+      user: userToReturn,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+});
+
+// @route Get /api/auth/current
+// @desc Return currently authed user
+// @access Private
+router.get("/current", requiresAuth, (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  return res.json(req.user);
 });
 
 export default router;
