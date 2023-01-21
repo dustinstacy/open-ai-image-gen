@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import User from "../models/User.js";
-import validateRegisterInput from "../routes/validation/registerValidation.js";
+import validateRegisterInput from "../validation/registerValidation.js";
 import requiresAuth from "../middleware/permissions.js";
 
 const router = express.Router();
