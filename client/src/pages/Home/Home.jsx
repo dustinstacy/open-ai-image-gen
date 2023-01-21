@@ -17,7 +17,6 @@ const Home = () => {
 
   return (
     <div className='page'>
-      <NavBar />
       <div className='nav__cards'>
         {navlinks.map((link) => {
           if (link.name !== "Home") {

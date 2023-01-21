@@ -78,7 +78,6 @@ const PromptBuilder = () => {
 
   return (
     <div className='page'>
-      <NavBar />
       {isLoading && <Loader />}
       {imageRetrieved && (
       <div className="image__container">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavBar } from '../../components'
+import { NavBar, AuthBox } from '../../components'
 
 import {lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
 
@@ -9,9 +9,8 @@ const Randomizer = () => {
 
   return (
     <div className='page'>
-      <NavBar />
       <div className='randomizer__container'>
-        <button type="button" onClick={() => spin()}>Spin</button>
+        <AuthBox />
       </div>
     </div>
       )
