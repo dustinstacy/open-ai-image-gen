@@ -2,7 +2,7 @@ import validator from "validator";
 
 import isEmpty from "./isEmpty.js";
 
-const validateHistory = (data) => {
+const validatePrompt = (data) => {
   let errors = {};
 
   if (isEmpty(data.prompt)) {
@@ -17,4 +17,4 @@ const validateHistory = (data) => {
   };
 };
 
-export default validateHistory;
+export default validatePrompt;
