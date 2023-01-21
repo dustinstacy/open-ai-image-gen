@@ -2,17 +2,20 @@ import { Schema, model } from "mongoose";
 
 const PromptSchema = new Schema(
   {
-    name: {
+    prompt: {
       type: String,
       required: true,
     },
-    imgUrl: {
-      type: Image,
+    category: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
       required: true,
     },
     description: {
       type: String,
-      required: false,
     },
   },
   {
@@ -20,4 +23,6 @@ const PromptSchema = new Schema(
   }
 );
 
-export const Prompt = model("Prompt", PromptSchema);
+const Prompt = model("Prompt", PromptSchema);
+
+export default Prompt;

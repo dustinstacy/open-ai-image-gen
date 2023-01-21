@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import authRoute from "./routes/auth.js";
 import historyRoute from "./routes/history.js";
+import promptsRoute from "./routes/prompts.js";
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.post("/", async (req, res) => {
 
 app.use("/api/auth", authRoute);
 app.use("/api/history", historyRoute);
+app.use("/api/prompts", promptsRoute);
 
 mongoose
   .connect(process.env.MONGO_URI)
