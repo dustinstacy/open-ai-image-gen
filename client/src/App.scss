@@ -50,10 +50,15 @@ a {
   color: var(--primary-color);
   font-weight: 500;
   text-decoration: none;
-}
 
-a:hover {
-  color: var(--tertiary-color);
+  &:hover {
+    color: var(--tertiary-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
 }
 
 button {
@@ -67,10 +72,15 @@ button {
   font-family: inherit;
   transition: border-color 0.5s;
   cursor: pointer;
-}
 
-button:hover {
-  background-color: var(--lightGray-color);
-  border-color: var(--primary-color);
-  color: var(--secondary-color);
+  &:hover {
+    background-color: var(--lightGray-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
 }

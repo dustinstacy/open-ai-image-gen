@@ -8,6 +8,7 @@
 
     img {
         cursor: pointer;
+        pointer-events: none;
     }
 
     &__links {

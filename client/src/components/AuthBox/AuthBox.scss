@@ -8,7 +8,7 @@
     &__box {
     max-width: 480px;
     width: 100%;
-    padding: 48px;
+    padding: 24px 48px;
     background-color: var(--primary-color);
     color: var(--white-color);
     border: 2px solid var(--secondary-color);
@@ -16,12 +16,11 @@
     }
 
     &__title {
-        margin-bottom: 20px;
         text-align: center;
     }
 
     &__field {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
 
 
         label{
@@ -32,7 +31,7 @@
 
         input {
             background-color: var(--lightGray-color);
-            width: 22.5vw;
+            width: 95%;
             padding: 10px;
             border-radius: 6px;
             font-size: 1rem;
@@ -47,6 +46,7 @@
     &__footer {
         button {
             width: 100%;
+            margin-top: 24px;
         }
 
         .auth__error{
@@ -63,6 +63,16 @@
         font-size: 1rem;
         margin-top: 10px;
         color: var(--tertiary-color);
+    }
+
+    &__register {
+        text-align: center;
+        margin-top: 1rem;
+
+        a{
+        color: var(--tertiary-color);
+        text-decoration: underline;
+        }
     }
 
 

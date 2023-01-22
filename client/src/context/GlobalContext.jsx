@@ -24,13 +24,13 @@ const globalReducer = (state, action) => {
     case "SET_HISTORY":
       return {
         ...state,
-        promptHistory: action.paylod,
+        promptHistory: action.payload,
       }
     case "RESET_USER":
       return {
         user: null,
         fetchingUser: false,
-        promptsHistory: [],
+        promptHistory: [],
       }
     default:
       return state;
@@ -65,11 +65,11 @@ export const GlobalProvider = ({ children }) => {
       const res = await axios.get("/api/auth/current");
 
       if (res.data) {
+        const promptHistoryRes = await axios("/api/history/current");
+
         dispatch({
           type: "SET_USER", payload: res.data
         })
-
-        const promptHistoryRes = axios("/api/history/current");
 
         if (promptHistoryRes.data) {
           dispatch({
@@ -83,6 +83,16 @@ export const GlobalProvider = ({ children }) => {
       console.log(error);
     }
   }
+
+  const getPromptHistory = async () => {
+    try {
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
 
   const logout = async () => {
     try {
@@ -99,6 +109,7 @@ export const GlobalProvider = ({ children }) => {
     ...state,
     getCurrentUser,
     getPrompts,
+    getPromptHistory,
     logout,
   };
 
