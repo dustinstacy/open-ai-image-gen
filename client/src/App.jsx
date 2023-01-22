@@ -1,15 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { GlobalProvider } from './context/GlobalContext';
-import { CustomPrompt, PromptBuilder, Randomizer, Home } from './pages';
+import { CustomPrompt, PromptBuilder, Randomizer, Home, History } from './pages';
 import { NavBar, AuthBox } from './components';
 
-import './main.scss'
+import "./App.scss"
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+const App = () => {
+  return (
     <GlobalProvider>
       <Router>
         <NavBar />
@@ -18,10 +17,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/prompt-builder" element={<PromptBuilder />} />
             <Route path="/randomizer" element={<Randomizer />} />
             <Route path="/custom-prompt" element={<CustomPrompt />} />
+            <Route path="/history" element={<History />} />
             <Route path="/login" element={<AuthBox />} />
             <Route path="/register" element={<AuthBox register/>} />
         </Routes>
       </Router>
     </GlobalProvider>
-  </React.StrictMode>
-)
+  )
+}
+
+export default App

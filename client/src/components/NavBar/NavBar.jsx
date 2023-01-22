@@ -1,26 +1,54 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
+import { useGlobalContext } from '../../context/GlobalContext';
 import { navlinks } from '../../constants'
 import { logo } from '../../assets';
+
 import './NavBar.scss'
 
 const NavBar = () => {
-  const navigate = useNavigate();
+  const { user, logout } = useGlobalContext();
+  const { pathname } = useLocation();
 
   return (
     <div className='navbar'>
-      <img src={logo} alt="logo" onClick={() => navigate('/')} />
+        <img src={logo} alt="logo"/>
       <div className='navbar__links'>
-        {navlinks.map((link) => (
-          <NavLink
-            key={link.name}
-            to={link.link}
-            className="navbar__link"
-          >{link.name}
-          </NavLink>
-        ))}
+        {navlinks.map((link) => {
+          if (!user && link.name === "History") {
+            return (
+              <span
+                style={{opacity: 0.5, pointerEvents: "none"}}
+                key={link.name}
+                className="navbar__link"
+              >{link.name}
+              </span>
+            )
+          } else {
+            return (
+              <NavLink
+                key={link.name}
+                to={link.link}
+                className="navbar__link"
+              >{link.name}
+              </NavLink>
+            )
+          }
+        })}
       </div>
+      {user ? (
+            <button onClick={logout}>Logout</button>
+      ) : pathname === "/login" ? (
+        <NavLink to="/register">
+          <button>Register</button>
+        </NavLink>
+      ) : (
+        <NavLink to="/login">
+          <button>Login</button>
+        </NavLink>
+      )}
+
     </div>
   )
 }

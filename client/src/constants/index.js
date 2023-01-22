@@ -55,6 +55,12 @@ export const navlinks = [
     imgUrl: wrench,
     description: "Enter you own custom prompt",
   },
+  {
+    name: "History",
+    link: "/history",
+    imgUrl: wrench,
+    description: "Past prompts",
+  },
 ];
 
 export const lighting = [
