@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { CgCloseR } from 'react-icons/cg';
 
-import { NavBar, PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
+import { PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
 import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
 
@@ -25,7 +25,7 @@ const PromptBuilder = () => {
   useEffect(() => {
     const promptBuild = selectedPrompts.join(" ")
     setInputs({...inputs, prompt: promptBuild})
-  }, [selectedPrompts])
+  }, [selectedPrompts, inputs])
 
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });

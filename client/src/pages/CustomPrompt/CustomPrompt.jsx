@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Loader, NavBar, SizeSlider, ResultsCount } from "../../components";
+import { Loader, SizeSlider, ResultsCount } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
 
 import  './CustomPrompt.scss'
