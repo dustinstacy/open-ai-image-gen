@@ -10,10 +10,11 @@ const PromptHistorySchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-      required: true,
-    },
+    images: [
+      {
+        type: String,
+      },
+    ],
     favorite: {
       type: Boolean,
       default: false,

@@ -19,15 +19,16 @@ router.get("/test", (req, res) => {
 router.post("/new", requiresAuth, async (req, res) => {
   try {
     const { isValid, errors } = validateHistory(req.body);
+    console.log(req.body);
 
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
     const newHistory = new PromptHistory({
-      user: req.user._id,
+      user: req.body.user,
       prompt: req.body.prompt,
-      image: req.body.image,
+      images: req.body.images,
     });
 
     await newHistory.save();
