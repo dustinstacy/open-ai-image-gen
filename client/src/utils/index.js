@@ -1,4 +1,4 @@
-export const fetchResults = async ({ inputs, setData, setImageRetrieved, setIsLoading }) => {
+export const fetchResults = async ({ inputs, setImageData, setImageRetrieved, setIsLoading }) => {
   const response = await fetch("http://localhost:5000", {
     method: "POST",
     headers: {
@@ -12,8 +12,14 @@ export const fetchResults = async ({ inputs, setData, setImageRetrieved, setIsLo
   });
 
   if (response.ok) {
-    const data = await response.json();
-    setData(data.images.data);
+    const resData = await response.json();
+    const imageData = [];
+
+    resData.images.data.forEach((image) => {
+      imageData.push(image.url);
+    });
+
+    setImageData(imageData);
     setImageRetrieved(true);
     setIsLoading(false);
   } else {

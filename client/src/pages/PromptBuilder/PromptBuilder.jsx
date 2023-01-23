@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
 import { PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
@@ -7,9 +8,12 @@ import { categories, lighting, energies, cameraSettings, media, artists, aesthet
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
 
 import './PromptBuilder.scss'
+import { useGlobalContext } from '../../context/GlobalContext';
 
 
 const PromptBuilder = () => {
+  const { user } = useGlobalContext();
+
   const [inputs, setInputs] = useState({
     prompt: '',
     count:"1",
@@ -18,18 +22,12 @@ const PromptBuilder = () => {
   const [selectedPrompts, setSelectedPrompts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [imageRetrieved, setImageRetrieved] = useState(false)
-  const [data, setData] = useState({})
+  const [imageData, setImageData] = useState(null)
 
   const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
 
-  useEffect(() => {
-    const promptBuild = selectedPrompts.join(" ")
-    setInputs({...inputs, prompt: promptBuild})
-  }, [selectedPrompts, inputs])
-
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });
-    console.log(inputs);
   };
 
   const handleClick = (prompt, e) => {
@@ -46,6 +44,9 @@ const PromptBuilder = () => {
       e.target.classList.add('active__prompt');
       setSelectedPrompts([...selectedPrompts, value]);
     }
+
+    const promptBuild = selectedPrompts.join(" ")
+    setInputs({ ...inputs, prompt: promptBuild })
   }
 
   const addCustomPrompt = () => {
@@ -67,37 +68,44 @@ const PromptBuilder = () => {
     setIsLoading(true);
     integerConversion({ inputs })
     sizeConversion({ inputs })
-    fetchResults({ inputs, setData, setImageRetrieved, setIsLoading });
+    fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading });
   }
+
+
+    useEffect(() => {
+        if (user && imageRetrieved) {
+            setImageRetrieved(false);
+            axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+        }
+    }, [imageRetrieved, user, inputs, imageData])
 
   const reset = (e) => {
     e.preventDefault();
-    setImageRetrieved(false)
+    setImageRetrieved(false);
+    setImageData(null);
   }
 
 
   return (
     <div className='page'>
       {isLoading && <Loader />}
-      {imageRetrieved && (
+      {imageData && (
       <div className="image__container">
-        {imageRetrieved && (
           <div className='results'>
             <div className='images'>
-              {data.map((src, idx) => (
-                <img key={src + idx} src={src.url} alt={inputs.prompt} />
+              {imageData.map((src, idx) => (
+                <img key={src + idx} src={src} alt={inputs.prompt} />
               ))}
             </div>
             <div>
               <button type="button" onClick={(e) => reset(e)}>Try Again?</button>
             </div>
           </div>
-        )}
         </div>
       )}
 
 
-      {!imageRetrieved && !isLoading && (
+      {!imageData && !isLoading && (
         <div className='builder__container'>
       <Tabs>
         <TabList>

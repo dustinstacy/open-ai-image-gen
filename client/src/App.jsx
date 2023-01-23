@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { GlobalProvider } from './context/GlobalContext';
-import { CustomPrompt, PromptBuilder, Randomizer, Home, History } from './pages';
+import { CustomPrompt, PromptBuilder, Home, History } from './pages';
 import { NavBar, AuthBox } from './components';
 
 import "./App.scss"
@@ -15,7 +15,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/prompt-builder" element={<PromptBuilder />} />
-            <Route path="/randomizer" element={<Randomizer />} />
             <Route path="/custom-prompt" element={<CustomPrompt />} />
             <Route path="/history" element={<History />} />
             <Route path="/login" element={<AuthBox />} />
