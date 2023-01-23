@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
 import { navlinks } from '../../constants';
-import { NavBar } from '../../components';
 
 import './Home.scss'
 
@@ -21,6 +20,8 @@ const Home = () => {
         {navlinks.map((link) => {
           if (link.name !== "Home") {
             return <NavCard link={link} key={link.name} />
+          } else {
+            return <p key={link.name} />
           }
         })}
       </div>

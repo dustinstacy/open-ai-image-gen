@@ -1,0 +1,43 @@
+
+
+.history {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4rem;
+    color: var(--primary-color);
+
+    &__collection {
+        width: 85%;
+        padding-top: 2rem;
+        border-bottom: 1px solid var(--secondary-color);
+    }
+
+    &__images {
+        display: flex;
+
+        img {
+            max-height: 256px;
+            max-width: 256px;
+        }
+    }
+
+    &__prompt {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+        line-height: 1rem;
+        font-size: 18px;
+        margin: -.5rem 0 0 1rem;
+
+        span {
+            cursor: pointer;
+        }
+
+        p {
+            margin-left: 1rem;
+            color: var(--primary-color)
+        }
+    }
+}
