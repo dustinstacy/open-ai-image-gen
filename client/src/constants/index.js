@@ -3,7 +3,6 @@ import {
   blacklight,
   buildingBlocks,
   candlelight,
-  neondice,
   studiolight,
   wrench,
   threeDRender,
@@ -42,12 +41,6 @@ export const navlinks = [
     link: "/prompt-builder",
     imgUrl: buildingBlocks,
     description: "Construct prompts from series of choices",
-  },
-  {
-    name: "Randomizer",
-    link: "/randomizer",
-    imgUrl: neondice,
-    description: "Surprise me!",
   },
   {
     name: "Custom Prompt",

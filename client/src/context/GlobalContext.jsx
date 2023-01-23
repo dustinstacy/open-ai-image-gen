@@ -84,16 +84,6 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  const getPromptHistory = async () => {
-    try {
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
-
   const logout = async () => {
     try {
       await axios.put("/api/auth/logout");
@@ -109,7 +99,6 @@ export const GlobalProvider = ({ children }) => {
     ...state,
     getCurrentUser,
     getPrompts,
-    getPromptHistory,
     logout,
   };
 

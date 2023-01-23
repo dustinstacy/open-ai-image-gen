@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Loader, SizeSlider, ResultsCount } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 import  './CustomPrompt.scss'
 
 const CustomPrompt = () => {
+    const { user } = useGlobalContext();
+
     const [inputs, setInputs] = useState({
         prompt: '',
         count: "1",
         size: "1",
     })
     const [isLoading, setIsLoading] = useState(false)
+    const [imageData, setImageData] = useState(null)
     const [imageRetrieved, setImageRetrieved] = useState(false)
-    const [data, setData] = useState({})
+
 
     const handleFormFieldChange = (fieldName, e) => {
         setInputs({ ...inputs, [fieldName]: e.target.value });
@@ -25,16 +30,23 @@ const CustomPrompt = () => {
         setIsLoading(true);
         integerConversion({ inputs })
         sizeConversion({ inputs })
-        fetchResults({ inputs, setData, setImageRetrieved, setIsLoading });
+        fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading });
     }
+
+    useEffect(() => {
+        if (user && imageRetrieved) {
+            setImageRetrieved(false);
+            axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+        }
+    }, [imageRetrieved, user, inputs, imageData])
 
     return (
         <div className="page">
             <div className="image__container">
                 {isLoading && <Loader />}
-                { imageRetrieved && (
-                    data.map((src, idx) => (
-                        <img key={src + idx} src={src.url} alt={inputs.prompt} />
+                { imageData &&  (
+                    imageData.map((src, idx) => (
+                        <img key={src + idx} src={src} alt={inputs.prompt} />
                     )
                 ))}
             </div>
