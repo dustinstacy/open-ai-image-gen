@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react'
 import { useGlobalContext } from '../../context/GlobalContext'
-import { useNavigate } from 'react-router-dom';
 
 import "./History.scss"
 
 const History = () => {
-    const { user, promptHistory } = useGlobalContext();
-    const navigate = useNavigate();
+    const {promptHistory, getCurrentUser } = useGlobalContext();
 
-    useEffect(() => {
-        if (!user && navigate) {
-            navigate("/");
-        }
-    }, [user, navigate])
+  useEffect(() => {
+    getCurrentUser();
+
+    }, [getCurrentUser])
 
   const toggleFavorite = async (e, history) => {
     e.preventDefault();
@@ -20,6 +17,8 @@ const History = () => {
 
   return (
     <div className="page">
+      <div className='history__container'>
+      {promptHistory.length > 0 ? (
       <div className='history'><h1>Prompt History</h1>
       {promptHistory.map((history) => (
         <div className='history__collection' key={history._id}>
@@ -35,7 +34,12 @@ const History = () => {
         </div>
       ))}
         </div>
+      ) : (
+        <h1 className='history__login'>Login to see your prompt history</h1>
+        )}
+        </div>
     </div>
+
   )
 }
 
