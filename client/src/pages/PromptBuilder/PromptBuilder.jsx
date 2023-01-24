@@ -16,7 +16,7 @@ const PromptBuilder = () => {
 
   const [inputs, setInputs] = useState({
     prompt: '',
-    count:"1",
+    count: "1",
     size: "1",
   })
   const [selectedPrompts, setSelectedPrompts] = useState([])
@@ -25,6 +25,9 @@ const PromptBuilder = () => {
   const [imageData, setImageData] = useState(null)
 
   const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
+  const promptBuild = selectedPrompts.join(" ")
+
+  console.log(promptBuild);
 
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });
@@ -37,7 +40,7 @@ const PromptBuilder = () => {
     if (selectedPrompts.includes(prompt)) {
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt));
       activePrompt.classList.remove('active__prompt');
-    } else if(selectedPrompts.includes(prompt.name)) {
+    } else if (selectedPrompts.includes(prompt.name)) {
       e.target.classList.remove('active__prompt')
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.name));
     } else {
@@ -45,7 +48,6 @@ const PromptBuilder = () => {
       setSelectedPrompts([...selectedPrompts, value]);
     }
 
-    const promptBuild = selectedPrompts.join(" ")
     setInputs({ ...inputs, prompt: promptBuild })
   }
 
@@ -61,6 +63,14 @@ const PromptBuilder = () => {
       addCustomPrompt();
     }
   }
+
+  useEffect(() => {
+    const currentPrompts = inputs.prompt;
+    console.log(currentPrompts, promptBuild);
+    if (currentPrompts !== promptBuild) {
+      setInputs({ ...inputs, prompt: promptBuild });
+    }
+  }, [selectedPrompts, inputs, promptBuild])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,0 +1,39 @@
+.pagination {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        list-style: none;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    &__number {
+        cursor: pointer;
+        width: 10%;
+
+        &:nth-child(2){
+            padding-right: 5px;
+        }
+    }
+
+    .active {
+        background-color: var(--tertiary-color);
+        border-radius: 50%;
+    }
+
+    .disabled {
+        opacity: 50%;
+        pointer-events: none;
+    }
+
+    .arrow {
+        cursor: pointer;
+    }
+}

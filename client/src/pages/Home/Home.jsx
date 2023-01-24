@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div className='page'>
-      <div className='nav__cards'>
+      <div className='home__container'>
         {navlinks.map((link) => {
           if (link.name !== "Home") {
             return <NavCard link={link} key={link.name} />
