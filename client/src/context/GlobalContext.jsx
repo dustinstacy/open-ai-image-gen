@@ -6,6 +6,7 @@ const inititalState = {
   fetchingUser: true,
   prompts: [],
   promptHistory: [],
+  favorites: [],
 };
 
 const globalReducer = (state, action) => {
@@ -25,6 +26,11 @@ const globalReducer = (state, action) => {
       return {
         ...state,
         promptHistory: action.payload,
+      }
+    case "SET_FAVORITES":
+      return {
+        ...state,
+        favorites: action.paylod,
       }
     case "RESET_USER":
       return {
@@ -95,11 +101,33 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  const markHistoryFavorite = (history) => {
+    dispatch({
+      type: "SET_NON_FAVORITES",
+      payload: state.favorites.filter((favorite) => favorite._id !== history._id)
+    })
+
+    dispatch({
+      type: "SET_FAVORITES",
+      payload: [history, ...state.favorites]
+    })
+  }
+
+  const removeHistoryFavorite = (history) => {
+    dispatch({
+      type: "REMOVE_FAVORITE",
+      payload: state.favorites.filter((favorite) => favorite._id !== history._id)
+    })
+
+  }
+
   const value = {
     ...state,
     getCurrentUser,
     getPrompts,
     logout,
+    markHistoryFavorite,
+    removeHistoryFavorite,
   };
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;

@@ -11,13 +11,34 @@
     align-items: flex-start;
     justify-content: flex-start;
     color: var(--primary-color);
-    margin: 6rem 0;
+    margin: 4rem 0;
 
+    &__header {
+
+        button {
+            height: 2rem;
+            font-size: 1rem;
+            line-height: .5rem;
+        }
+
+        .filtered {
+            background-color: var(--lightGray-color);
+            border-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+    }
 
     &__collection {
         width: 100%;
         padding-top: 2rem;
-        border-bottom: 1px solid var(--secondary-color);
+        padding-left: 2rem;
+        margin-top: 2rem;
+        border-bottom: 2px solid var(--secondary-color);
+        border-bottom: 2px solid var(--secondary-color);
+        border-top: 1px solid var(--tertiary-color);
+        border-left: 1px solid var(--tertiary-color);
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
     &__images {
@@ -39,6 +60,7 @@
 
         span {
             cursor: pointer;
+            font-size: 1.5rem;
         }
 
         p {
