@@ -1,7 +1,15 @@
 .history__container {
+    margin-top: 64px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - (var(--navbar-height)));
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    position: fixed;
+    z-index: 1;
 }
 
 .history {
@@ -19,6 +27,7 @@
             height: 2rem;
             font-size: 1rem;
             line-height: .5rem;
+            margin-top: 1rem;
         }
 
         .filtered {
@@ -30,19 +39,20 @@
 
     &__collection {
         width: 100%;
-        padding-top: 2rem;
-        padding-left: 2rem;
+        padding: 1rem;
         margin-top: 2rem;
         border-bottom: 2px solid var(--secondary-color);
-        border-bottom: 2px solid var(--secondary-color);
-        border-top: 1px solid var(--tertiary-color);
-        border-left: 1px solid var(--tertiary-color);
+        border-right: 2px solid var(--secondary-color);
+        border-top: 2px solid var(--tertiary-color);
+        border-left: 2px solid var(--tertiary-color);
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color: var(--white-color);
     }
 
     &__images {
         display: flex;
+        padding-bottom: 1rem;
 
         img {
             max-height: 256px;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Loader, SizeSlider, ResultsCount } from "../../components";
+import { Loader, SizeSlider, ResultsCount, Footer } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
 import { useGlobalContext } from "../../context/GlobalContext";
 
@@ -26,6 +26,7 @@ const CustomPrompt = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setImageData(false);
         setImageRetrieved(false);
         setIsLoading(true);
         integerConversion({ inputs })
@@ -33,12 +34,12 @@ const CustomPrompt = () => {
         fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading });
     }
 
-    useEffect(() => {
-        if (user && imageRetrieved) {
-            setImageRetrieved(false);
-            axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
-        }
-    }, [imageRetrieved, user, inputs, imageData])
+useEffect(() => {
+    if (user && imageRetrieved) {
+        setImageRetrieved(false);
+        axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+    }
+}, [imageRetrieved, user, inputs, imageData])
 
     return (
         <div className="page">
@@ -65,6 +66,7 @@ const CustomPrompt = () => {
                 <button type="submit">Generate</button>
                 </form>
             </div>
+            <Footer />
         </div>
     )
 }

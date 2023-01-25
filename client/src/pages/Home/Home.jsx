@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { Footer } from '../../components';
 
 import { navlinks } from '../../constants';
 
@@ -25,6 +26,7 @@ const Home = () => {
           }
         })}
       </div>
+      <Footer />
     </div>
   )
 }

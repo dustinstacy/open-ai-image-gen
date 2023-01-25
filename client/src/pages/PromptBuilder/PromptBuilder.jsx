@@ -3,8 +3,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
-import { PromptCard, ResultsCount, SizeSlider, Loader } from '../../components'
-import { categories, lighting, energies, cameraSettings, media, artists, aesthetics, structure } from '../../constants';
+import { PromptCard, ResultsCount, SizeSlider, Loader, Footer } from '../../components'
+import { categories, lighting, energies, camera, media, artists, aesthetics, structure } from '../../constants';
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
 
 import './PromptBuilder.scss'
@@ -24,7 +24,7 @@ const PromptBuilder = () => {
   const [imageRetrieved, setImageRetrieved] = useState(false)
   const [imageData, setImageData] = useState(null)
 
-  const promptArrays = [lighting, energies, aesthetics, cameraSettings, artists, structure, media];
+  const promptArrays = [lighting, energies, aesthetics, camera, artists, structure, media];
   const promptBuild = selectedPrompts.join(" ")
 
   console.log(promptBuild);
@@ -82,12 +82,12 @@ const PromptBuilder = () => {
   }
 
 
-    useEffect(() => {
-        if (user && imageRetrieved) {
-            setImageRetrieved(false);
-            axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
-        }
-    }, [imageRetrieved, user, inputs, imageData])
+  useEffect(() => {
+      if (user && imageRetrieved) {
+          setImageRetrieved(false);
+          axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+      }
+  }, [imageRetrieved, user, inputs, imageData])
 
   const reset = (e) => {
     e.preventDefault();
@@ -157,16 +157,16 @@ const PromptBuilder = () => {
                 onKeyDown={(e) => handleEnterKey(e)}
                 />
               <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
-
             <ResultsCount handleChange={handleFormFieldChange} />
             <SizeSlider handleChange={handleFormFieldChange} />
+            <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
           </div>
-          <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+
         </div>
 
           </div>
       )}
-
+      <Footer />
     </div>
   )
 }

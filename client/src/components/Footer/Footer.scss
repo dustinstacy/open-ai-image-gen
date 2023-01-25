@@ -1,0 +1,17 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    height: var(--footer-height);
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+
+    &__info {
+        font-size: .85rem;
+        margin-right: 2rem;
+        margin-bottom: .5rem;
+        align-self: flex-end;
+    }
+}
