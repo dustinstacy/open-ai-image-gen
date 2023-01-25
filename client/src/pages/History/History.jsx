@@ -15,7 +15,9 @@ const History = () => {
 
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = promptHistory.slice(indexOfFirstResult, indexOfLastResult);
+  const currentResults = filterFavorites ?
+    promptHistory.filter((history) => history.favorite === true).slice(indexOfFirstResult, indexOfLastResult)
+    : promptHistory.slice(indexOfFirstResult, indexOfLastResult);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -83,10 +85,11 @@ const History = () => {
       )))}
             <Paginate
               resultsPerPage={resultsPerPage}
-              totalHistory={promptHistory.length}
+              results={promptHistory}
               paginate={paginate}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              filter={filterFavorites}
             />
         </div>
       ) : (
