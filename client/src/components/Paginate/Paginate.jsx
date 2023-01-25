@@ -3,11 +3,18 @@ import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from 'react-icons
 
 import './Paginate.scss'
 
-const Paginate = ({ resultsPerPage, totalHistory, paginate, currentPage, setCurrentPage }) => {
+const Paginate = ({ resultsPerPage, results, paginate, currentPage, setCurrentPage, filter }) => {
     const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalHistory / resultsPerPage); i++) {
-        pageNumbers.push(i);
+    if (!filter) {
+        for (let i = 1; i <= Math.ceil(results.length / resultsPerPage); i++) {
+            pageNumbers.push(i);
+        }
+    } else {
+        const filteredResults = results.filter((result) => result.favorite === true)
+        for (let i = 1; i <= Math.ceil(filteredResults.length / resultsPerPage); i++) {
+            pageNumbers.push(i);
+        }
     }
 
     const previousPage = () => {
