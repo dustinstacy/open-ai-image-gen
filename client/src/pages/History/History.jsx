@@ -4,8 +4,7 @@ import axios from 'axios'
 import {BsHeart, BsHeartFill} from 'react-icons/bs'
 
 import "./History.scss"
-import Paginate from '../../components/Paginate/Paginate'
-import Footer from '../../components/Footer/Footer'
+import {Footer, Paginate, ImageCard} from '../../components'
 
 const History = () => {
   const { promptHistory, getCurrentUser, user } = useGlobalContext();
@@ -15,9 +14,11 @@ const History = () => {
 
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-  const currentResults = filterFavorites ?
+  const currentResults = !filterFavorites ? promptHistory.slice(indexOfFirstResult, indexOfLastResult) :
     promptHistory.filter((history) => history.favorite === true).slice(indexOfFirstResult, indexOfLastResult)
-    : promptHistory.slice(indexOfFirstResult, indexOfLastResult);
+    ;
+
+
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -59,11 +60,11 @@ const History = () => {
                         <div className='history__collection' key={favorite._id}>
           <div className='history__images'>
             {favorite.images.map((image) => (
-              <img key={image.slice(-10)} src={image} alt="prompt" />
+              <img key={image} src={image} alt="prompt" />
             ))}
           </div>
           <div className='history__prompt'>
-            <span onClick={(e) => !favorite.favorite ? markFavorite(e, favorite) : removeFavorite(e, favorite)}>{favorite.favorite ? <BsHeartFill/> : <BsHeart/>}</span>
+            <span onClick={(e) => !favorite.favorite ? markFavorite(e, favorite) : removeFavorite(e, favorite)}>{favorite.favorite ? <BsHeartFill className='heart'/> : <BsHeart/>}</span>
             <p>{favorite.prompt}</p>
           </div>
         </div>
@@ -71,13 +72,13 @@ const History = () => {
       ) : (currentResults.map((history) => (
         <div className='history__collection' key={history._id}>
           <div className='history__images'>
-            {history.images.map((image) => (
-              <img key={image.slice(-10)} src={image} alt="prompt" />
+            {history.images.map((image, i) => (
+              <ImageCard id={image + i} prompt={history.prompt} name={user.name} image={image} key={image} />
             ))}
           </div>
           <div className='history__prompt'>
             <span className="history__favorite" onClick={(e) => !history.favorite ? markFavorite(e, history) : removeFavorite(e, history)}>
-              {history.favorite ? <BsHeartFill/> : <BsHeart/>}
+              {history.favorite ? <BsHeartFill className='heart'/> : <BsHeart/>}
             </span>
             <p>{history.prompt}</p>
           </div>
@@ -96,7 +97,6 @@ const History = () => {
         <h1 className='history__login'>{user ? "Time to make history" : "Login in to view your history"}</h1>
         )}
       </div>
-      <Footer />
     </div>
 
   )

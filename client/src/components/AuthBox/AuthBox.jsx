@@ -69,7 +69,7 @@ const AuthBox = ({ register }) => {
         <form onSubmit={onSubmit}>
           {register && (
             <div className="auth__field">
-              <label>Name</label>
+              <label>Username</label>
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
               {errors.name && (
                 <p className="auth__error">{errors.name}</p>

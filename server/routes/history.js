@@ -1,10 +1,20 @@
 import express from "express";
+import * as dotenv from "dotenv";
+import { v2 as cloudinary } from "cloudinary";
 
 import PromptHistory from "../models/PromptHistory.js";
 import requiresAuth from "../middleware/permissions.js";
 import validateHistory from "../validation/historyValidation.js";
 
+dotenv.config();
+
 const router = express.Router();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // @route GET /api/history/test
 // @desc Test the history route
@@ -19,16 +29,25 @@ router.get("/test", (req, res) => {
 router.post("/new", requiresAuth, async (req, res) => {
   try {
     const { isValid, errors } = validateHistory(req.body);
-    console.log(req.body);
+    const imageUrls = req.body.images;
 
     if (!isValid) {
       return res.status(400).json(errors);
     }
 
+    const imageData = [];
+
+    for (let image in imageUrls) {
+      const urls = await cloudinary.uploader.upload(imageUrls[image]);
+      imageData.push(urls.url);
+    }
+    console.log(imageData);
+
     const newHistory = new PromptHistory({
       user: req.body.user,
+      name: req.body.name,
       prompt: req.body.prompt,
-      images: req.body.images,
+      images: imageData,
     });
 
     await newHistory.save();

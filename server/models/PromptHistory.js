@@ -6,6 +6,10 @@ const PromptHistorySchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    name: {
+      type: String,
+      required: true,
+    },
     prompt: {
       type: String,
       required: true,
@@ -18,9 +22,6 @@ const PromptHistorySchema = new Schema(
     favorite: {
       type: Boolean,
       default: false,
-    },
-    createdAt: {
-      type: Date,
     },
   },
   {
