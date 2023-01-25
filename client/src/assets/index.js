@@ -31,6 +31,7 @@ import airbrush from "./airbrush.png";
 import elaborate from "./elaborate.png";
 import etching from "./etching.png";
 import disney from "./disney.png";
+import openAI from "./openAI.svg";
 
 export {
   neondice,
@@ -66,4 +67,5 @@ export {
   elaborate,
   disney,
   etching,
+  openAI,
 };

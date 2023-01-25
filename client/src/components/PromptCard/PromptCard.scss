@@ -16,17 +16,16 @@
     }
 
     h4 {
-        height: 1rem;
-        margin-top: 1rem;
+        padding: .5rem;
         color: var(--white-color);
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         pointer-events: none;
     }
 
     img {
+        margin-top: 0;
         height: 300px;
         width: 300px;
-        margin-top: -.5rem;
         border: 2px solid var(--secondary-color);
         pointer-events: none;
     }

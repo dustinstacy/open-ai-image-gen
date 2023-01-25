@@ -125,7 +125,7 @@ export const aesthetics = [
   },
 ];
 
-export const cameraSettings = [
+export const camera = [
   {
     name: "Close-up",
     imgUrl: closeup,
@@ -217,4 +217,4 @@ export const media = [
   },
 ];
 
-export const categories = ["Lighting", "Energies", "Aesthetics", "CameraSettings", "Artists", "Structure", "Media"];
+export const categories = ["Lighting", "Energies", "Aesthetics", "Camera", "Artists", "Structure", "Media"];

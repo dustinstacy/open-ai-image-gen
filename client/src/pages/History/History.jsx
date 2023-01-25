@@ -5,9 +5,10 @@ import {BsHeart, BsHeartFill} from 'react-icons/bs'
 
 import "./History.scss"
 import Paginate from '../../components/Paginate/Paginate'
+import Footer from '../../components/Footer/Footer'
 
 const History = () => {
-  const { promptHistory, getCurrentUser } = useGlobalContext();
+  const { promptHistory, getCurrentUser, user } = useGlobalContext();
   const [filterFavorites, setFilterFavorites] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const resultsPerPage = 10;
@@ -89,9 +90,10 @@ const History = () => {
             />
         </div>
       ) : (
-        <h1 className='history__login'>Login to see your prompt history</h1>
+        <h1 className='history__login'>{user ? "Time to make history" : "Login in to view your history"}</h1>
         )}
-        </div>
+      </div>
+      <Footer />
     </div>
 
   )
