@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { GlobalProvider } from './context/GlobalContext';
 import { CustomPrompt, PromptBuilder, Home, History } from './pages';
-import { NavBar, AuthBox } from './components';
+import { NavBar, AuthBox, Footer } from './components';
 
 import "./App.scss"
 
@@ -19,7 +19,8 @@ const App = () => {
             <Route path="/history" element={<History />} />
             <Route path="/login" element={<AuthBox />} />
             <Route path="/register" element={<AuthBox register/>} />
-        </Routes>
+          </Routes>
+        <Footer />
       </Router>
     </GlobalProvider>
   )

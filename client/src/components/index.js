@@ -5,3 +5,5 @@ export { default as SizeSlider } from "./SizeSlider/SizeSlider";
 export { default as ResultsCount } from "./ResultsCount/ResultsCount";
 export { default as AuthBox } from "./AuthBox/AuthBox";
 export { default as Footer } from "./Footer/Footer";
+export { default as Paginate } from "./Paginate/Paginate";
+export { default as ImageCard } from "./ImageCard/ImageCard";

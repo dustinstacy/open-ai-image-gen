@@ -1,0 +1,92 @@
+.card {
+    width: 350px;
+    height: 350px;
+    border-radius: 1rem;
+    position: relative;
+    margin: .5rem;
+
+    img {
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+    transition: .3s ease;
+    }
+
+    .inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0;
+        transition: .5s ease;
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        right: 5%;
+        bottom: 0;
+
+        &__top {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 2rem;
+            width: 100%;
+
+            .window {
+                cursor: pointer;
+            }
+        }
+
+        &__middle {
+            display: flex;
+            font-size: 3rem;
+
+            .option {
+                cursor: pointer;
+            }
+        }
+
+        &__bottom{
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: var(--secondary-color);
+            width: 100%;
+            border-radius: 1rem;
+            background-color: var(--tertiary-color);
+            margin-bottom: .5rem;
+
+
+            .icon{
+                color: var(--lightGray-color);
+                width: 2.25rem;
+                font-size: 1.5rem;
+                margin-left: 1rem;
+                background-color: var(--primary-color);
+                border-radius: 50%;
+                text-align: center;
+            }
+
+            p {
+            overflow: hidden;
+            white-space: nowrap;
+                word-wrap: break-word;
+                text-overflow: ellipsis;
+                margin-left: .5rem;
+}
+        }
+    }
+
+    &:hover {
+        img {
+            opacity: .3;
+        }
+
+        .inner {
+            opacity: 1;
+        }
+    }
+
+}
+
+

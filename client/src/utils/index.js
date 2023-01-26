@@ -1,5 +1,7 @@
+import FileSaver from "file-saver";
+
 export const fetchResults = async ({ inputs, setImageData, setImageRetrieved, setIsLoading }) => {
-  const response = await fetch("http://localhost:5000", {
+  const response = await fetch("/api/dalle", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,4 +42,13 @@ export const sizeConversion = ({ inputs }) => {
 
 export const integerConversion = ({ inputs }) => {
   inputs.count = parseInt(inputs.count);
+};
+
+export const openInNewWindow = (image) => {
+  window.open(image, "_blank", "noreferrer");
+};
+
+export const downloadImage = (image, _id) => {
+  console.log(_id, image);
+  FileSaver.saveAs(image, `download-${_id}.jpg`);
 };

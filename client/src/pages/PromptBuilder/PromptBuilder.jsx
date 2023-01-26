@@ -3,16 +3,16 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
-import { PromptCard, ResultsCount, SizeSlider, Loader, Footer } from '../../components'
-import { categories, lighting, energies, camera, media, artists, aesthetics, structure } from '../../constants';
+import { PromptCard, ResultsCount, SizeSlider, Loader, ImageCard} from '../../components'
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
+import { promptArrays, categories } from '../../data';
 
 import './PromptBuilder.scss'
 import { useGlobalContext } from '../../context/GlobalContext';
 
 
 const PromptBuilder = () => {
-  const { user } = useGlobalContext();
+  const { user, promptHistory } = useGlobalContext();
 
   const [inputs, setInputs] = useState({
     prompt: '',
@@ -24,10 +24,7 @@ const PromptBuilder = () => {
   const [imageRetrieved, setImageRetrieved] = useState(false)
   const [imageData, setImageData] = useState(null)
 
-  const promptArrays = [lighting, energies, aesthetics, camera, artists, structure, media];
   const promptBuild = selectedPrompts.join(" ")
-
-  console.log(promptBuild);
 
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });
@@ -66,7 +63,6 @@ const PromptBuilder = () => {
 
   useEffect(() => {
     const currentPrompts = inputs.prompt;
-    console.log(currentPrompts, promptBuild);
     if (currentPrompts !== promptBuild) {
       setInputs({ ...inputs, prompt: promptBuild });
     }
@@ -85,7 +81,7 @@ const PromptBuilder = () => {
   useEffect(() => {
       if (user && imageRetrieved) {
           setImageRetrieved(false);
-          axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+            axios.post("/api/history/new", { user: user._id, name: user.name, prompt: inputs.prompt, images: imageData });
       }
   }, [imageRetrieved, user, inputs, imageData])
 
@@ -98,19 +94,26 @@ const PromptBuilder = () => {
 
   return (
     <div className='page'>
-      {isLoading && <Loader />}
-      {imageData && (
-      <div className="image__container">
-          <div className='results'>
-            <div className='images'>
-              {imageData.map((src, idx) => (
-                <img key={src + idx} src={src} alt={inputs.prompt} />
-              ))}
-            </div>
-            <div>
-              <button type="button" onClick={(e) => reset(e)}>Try Again?</button>
-            </div>
+
+      {(imageData || isLoading) && (
+        <div className="image__container">
+          {isLoading && <Loader />}
+          {imageData && (
+        <div className='results'>
+        <div className='history__collection'>
+          <div className='history__images'>
+            {imageData.map((image, i) => (
+              <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
+            ))}
           </div>
+          <div className='history__prompt'>
+            <p>{inputs.prompt}</p>
+          </div>
+              </div>
+          <button onClick={(e) => reset(e)}>Try again?</button>
+              </div>
+          )}
+
         </div>
       )}
 
@@ -166,7 +169,6 @@ const PromptBuilder = () => {
 
           </div>
       )}
-      <Footer />
     </div>
   )
 }

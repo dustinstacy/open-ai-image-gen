@@ -9,6 +9,7 @@ const Footer = () => {
   return (
     <div className='footer'>
       <div className='footer__image'>
+        <span>POWERED BY</span>
         <img src={openAI} alt="open-ai" />
       </div>
       <div className='footer__info'>

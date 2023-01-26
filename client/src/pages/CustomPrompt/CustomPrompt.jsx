@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Loader, SizeSlider, ResultsCount, Footer } from "../../components";
+import { Loader, SizeSlider, ResultsCount, ImageCard } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
 import { useGlobalContext } from "../../context/GlobalContext";
 
@@ -37,7 +37,7 @@ const CustomPrompt = () => {
 useEffect(() => {
     if (user && imageRetrieved) {
         setImageRetrieved(false);
-        axios.post("/api/history/new", { prompt: inputs.prompt, user: user._id, images: imageData });
+        axios.post("/api/history/new", { user: user._id, name: user.name, prompt: inputs.prompt, images: imageData });
     }
 }, [imageRetrieved, user, inputs, imageData])
 
@@ -47,8 +47,8 @@ useEffect(() => {
             <div className="image__container">
                 {isLoading && <Loader />}
                 { imageData &&  (
-                    imageData.map((src, idx) => (
-                        <img key={src + idx} src={src} alt={inputs.prompt} />
+                    imageData.map((image, idx) => (
+                         <ImageCard id={image + idx} prompt={inputs.prompt} image={image} name={user.name} key={image} />
                     )
                 ))}
             </div>
@@ -66,7 +66,6 @@ useEffect(() => {
                 <button type="submit">Generate</button>
                 </form>
             </div>
-            <Footer />
         </div>
     )
 }
