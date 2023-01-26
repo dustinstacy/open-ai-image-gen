@@ -10,7 +10,17 @@ const router = express.Router();
 // @desc Test the prompt route
 // @access Admin
 router.get("/test", requiresAuth, (req, res) => {
-  res.send("Prompts route working");
+  try {
+    if (req.user.permissions === true) {
+      res.send("Prompts route working");
+    } else {
+      return res.status(404).json({ error: "You do not have access permissions" });
+    }
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).send(error.message);
+  }
 });
 
 // @route Post /api/prompts/add
@@ -25,7 +35,6 @@ router.post("/add", requiresAuth, async (req, res) => {
     }
 
     const newPrompt = new Prompts({
-      user: req.user._id,
       prompt: req.body.prompt,
       image: req.body.image,
       category: req.body.category,
@@ -99,7 +108,7 @@ router.put("/:promptId", requiresAuth, async (req, res) => {
 // @route   DELETE /api/prompts/:promptId/delete
 // @desc    Delete a prompt
 // @access  Admin
-router.delete("/:promptId/delete", requiresAuth, async (req, res) => {
+router.delete("/delete/:promptId", requiresAuth, async (req, res) => {
   try {
     const prompt = await Prompts.findOne({
       _id: req.params.promptId,

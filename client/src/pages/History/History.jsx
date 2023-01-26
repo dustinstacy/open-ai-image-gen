@@ -24,16 +24,19 @@ const History = () => {
 
   useEffect(() => {
     getCurrentUser();
-    }, [getCurrentUser])
+    console.log("ran");
+    }, [])
 
   const markFavorite = async (e, history) => {
     e.preventDefault();
     axios.put(`/api/history/${history._id}/favorite`)
+    getCurrentUser();
     }
 
   const removeFavorite = async (e, history) => {
     e.preventDefault();
     axios.put(`/api/history/${history._id}/removeFavorite`)
+    getCurrentUser();
   }
 
   const handleFilterFavorites = (e) => {

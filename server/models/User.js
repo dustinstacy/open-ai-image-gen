@@ -14,6 +14,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    permissions: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
