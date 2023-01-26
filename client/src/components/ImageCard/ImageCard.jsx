@@ -22,7 +22,7 @@ const ImageCard = ({ image, prompt, id, name }) => {
             </div>
 
             <div className='inner__bottom'>
-                <div className='icon'>{name}</div>
+                <div className='icon'>{name[0]}</div>
                 <p>{name}</p>
             </div>
 

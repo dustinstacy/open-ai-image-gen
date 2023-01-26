@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import { Footer } from '../../components';
 
 import { navlinks } from '../../constants';
 
@@ -9,7 +8,7 @@ const NavCard = ({ link }) => (
     <NavLink to={link.link} className='nav__card'>
         <h1>{link.name}</h1>
         <img src={link.imgUrl} alt={link.name} />
-        <h3>{link.description}</h3>
+        <p>{link.description}</p>
     </NavLink>
 );
 

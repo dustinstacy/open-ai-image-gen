@@ -4,7 +4,7 @@ import axios from 'axios'
 import {BsHeart, BsHeartFill} from 'react-icons/bs'
 
 import "./History.scss"
-import {Footer, Paginate, ImageCard} from '../../components'
+import {Paginate, ImageCard} from '../../components'
 
 const History = () => {
   const { promptHistory, getCurrentUser, user } = useGlobalContext();
@@ -17,8 +17,6 @@ const History = () => {
   const currentResults = !filterFavorites ? promptHistory.slice(indexOfFirstResult, indexOfLastResult) :
     promptHistory.filter((history) => history.favorite === true).slice(indexOfFirstResult, indexOfLastResult)
     ;
-
-
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -43,9 +41,6 @@ const History = () => {
     setFilterFavorites((current) => !current);
   }
 
-  useEffect(() => {
-  }, [promptHistory])
-
   return (
     <div className="page">
       <div className='history__container'>
@@ -55,21 +50,7 @@ const History = () => {
               <h1>Prompt History</h1>
               <button className={filterFavorites ? "filtered" : ""} onClick={(e) => handleFilterFavorites(e) }>Favorites</button>
             </div>
-      {filterFavorites ? (
-              currentResults.filter((history) => history.favorite === true).map((favorite) => (
-                        <div className='history__collection' key={favorite._id}>
-          <div className='history__images'>
-            {favorite.images.map((image) => (
-              <img key={image} src={image} alt="prompt" />
-            ))}
-          </div>
-          <div className='history__prompt'>
-            <span onClick={(e) => !favorite.favorite ? markFavorite(e, favorite) : removeFavorite(e, favorite)}>{favorite.favorite ? <BsHeartFill className='heart'/> : <BsHeart/>}</span>
-            <p>{favorite.prompt}</p>
-          </div>
-        </div>
-              ))
-      ) : (currentResults.map((history) => (
+            {currentResults.map((history) => (
         <div className='history__collection' key={history._id}>
           <div className='history__images'>
             {history.images.map((image, i) => (
@@ -83,7 +64,7 @@ const History = () => {
             <p>{history.prompt}</p>
           </div>
         </div>
-      )))}
+      ))}
             <Paginate
               resultsPerPage={resultsPerPage}
               results={promptHistory}

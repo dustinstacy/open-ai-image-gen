@@ -1,25 +1,24 @@
 .home__container {
-    margin-top: 64px;
     left: 0;
-    width: 100%;
     height: calc(100vh - (var(--navbar-height) + var(--footer-height)));
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-top: 64px;
 }
 
 .nav__card {
+    height: 75%;
     display: flex;
     flex-direction: column;
-    width: 480px;
-    height: 720px;
     align-items: center;
     justify-content: space-around;
-    background-color: var(--white-color);
-    border: 3px solid var(--secondary-color);
-    border-radius: 8px;
     margin: 0 2rem;
+    background-color: var(--white-color);
+    border: 2px solid var(--tertiary-color);
+    border-radius: 1rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
     h1 {
@@ -27,16 +26,69 @@
     }
 
     img {
-        width: 100%;
         height: 75%;
-        border: 1px solid var(--secondary-color);
+        width: 100%;
+        border: 1px solid var(--tertiary-color);
     }
 
-    h3 {
+    p {
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 2rem;
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .home__container {
+        position: fixed;
+        z-index: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: scroll;
+        height: calc(100vh - (var(--navbar-height)));
+
+        .nav__card {
+            height: 600px;
+            width: 400px;
+            margin: 1rem
+        }
+
+        p {
+            text-align: center;
+        }
+
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .home__container {
+        position: fixed;
+        z-index: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: scroll;
+        height: calc(100vh - (var(--navbar-height)));
+        padding-bottom: 6rem;
+
+        .nav__card {
+            height: 350px;
+            width: 225px;
+            margin: 1rem
+        }
+
+        h1 {
+            font-size: 1rem;
+            padding: 0;
+            text-align: center;
+        }
+
+        p {
+            font-size: .75rem;
+            text-align: center;
+        }
+
     }
 }
 

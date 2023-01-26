@@ -1,33 +1,35 @@
 .footer {
+    position: fixed;
+    z-index: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: var(--footer-height);
     display: flex;
     justify-content: space-between;
-    height: var(--footer-height);
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    z-index: 0;
 
     &__image {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        margin-top: 1rem;
+        width: 22.5vw;
+        height: 64px;
+        object-fit: cover;
+        margin-left: 2rem;
+        margin-top: .5rem;
     }
 
-
     span{
+        margin-left: -6.5rem;
         font-size: 1rem;
-        margin-left: -4.5rem;
-        margin-bottom: -1rem;
         line-height: 0rem;
     }
 
     &__info {
-        font-size: .85rem;
+        align-self: flex-end;
         margin-right: 3rem;
         margin-bottom: .5rem;
-        align-self: flex-end;
+        font-size: .85rem;
     }
 }

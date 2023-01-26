@@ -4,16 +4,15 @@ import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
 import { PromptCard, ResultsCount, SizeSlider, Loader, ImageCard} from '../../components'
-import { categories, lighting, energies, camera, media, artists, aesthetics, structure } from '../../constants';
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
+import { promptArrays, categories } from '../../data';
 
 import './PromptBuilder.scss'
 import { useGlobalContext } from '../../context/GlobalContext';
 
 
 const PromptBuilder = () => {
-  const { user } = useGlobalContext();
-
+  const { user, promptHistory } = useGlobalContext();
 
   const [inputs, setInputs] = useState({
     prompt: '',
@@ -25,7 +24,6 @@ const PromptBuilder = () => {
   const [imageRetrieved, setImageRetrieved] = useState(false)
   const [imageData, setImageData] = useState(null)
 
-  const promptArrays = [lighting, energies, aesthetics, camera, artists, structure, media];
   const promptBuild = selectedPrompts.join(" ")
 
   const handleFormFieldChange = (fieldName, e) => {
@@ -96,19 +94,26 @@ const PromptBuilder = () => {
 
   return (
     <div className='page'>
-      {isLoading && <Loader />}
-      {imageData && (
-      <div className="image__container">
-          <div className='results'>
-            <div className='images'>
-              {imageData.map((image, idx) => (
-                <ImageCard id={image + idx} prompt={inputs.prompt} image={image} name={user.name} key={image} />
-              ))}
-            </div>
-            <div>
-              <button type="button" onClick={(e) => reset(e)}>Try Again?</button>
-            </div>
+
+      {(imageData || isLoading) && (
+        <div className="image__container">
+          {isLoading && <Loader />}
+          {imageData && (
+        <div className='results'>
+        <div className='history__collection'>
+          <div className='history__images'>
+            {imageData.map((image, i) => (
+              <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
+            ))}
           </div>
+          <div className='history__prompt'>
+            <p>{inputs.prompt}</p>
+          </div>
+              </div>
+          <button onClick={(e) => reset(e)}>Try again?</button>
+              </div>
+          )}
+
         </div>
       )}
 

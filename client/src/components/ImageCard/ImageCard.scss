@@ -1,16 +1,15 @@
 .card {
+    width: 350px;
+    height: 350px;
     border-radius: 1rem;
     position: relative;
     margin: .5rem;
 
-
     img {
+    height: 100%;
+    width: 100%;
     opacity: 1;
-    display: block;
-    width: 20rem;
-    height: auto;
     transition: .3s ease;
-    backface-visibility: hidden;
     }
 
     .inner {
@@ -21,10 +20,10 @@
         opacity: 0;
         transition: .5s ease;
         position: absolute;
-        top: 10%;
-        left: 10%;
-        right: 0;
-        bottom: 5%;
+        top: 5%;
+        left: 5%;
+        right: 5%;
+        bottom: 0;
 
         &__top {
             display: flex;
@@ -39,10 +38,7 @@
 
         &__middle {
             display: flex;
-            width: 60%;
-            font-size: 2.5rem;
-            justify-content: space-around;
-
+            font-size: 3rem;
 
             .option {
                 cursor: pointer;
@@ -53,16 +49,16 @@
             height: 20%;
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            color: var(--white-color);
+            justify-content: flex-start;
+            color: var(--secondary-color);
             width: 100%;
             border-radius: 1rem;
-            background-color: var(--secondary-color);
+            background-color: var(--tertiary-color);
             margin-bottom: .5rem;
 
 
             .icon{
-                color: var(--tertiary-color);
+                color: var(--lightGray-color);
                 width: 2.25rem;
                 font-size: 1.5rem;
                 margin-left: 1rem;
@@ -72,12 +68,12 @@
             }
 
             p {
-                            overflow: hidden;
-                            white-space: nowrap;
-                                word-wrap: break-word;
-                                text-overflow: ellipsis;
-                                margin-left: .5rem;
-            }
+            overflow: hidden;
+            white-space: nowrap;
+                word-wrap: break-word;
+                text-overflow: ellipsis;
+                margin-left: .5rem;
+}
         }
     }
 
