@@ -31,8 +31,6 @@ const PromptBuilder = () => {
     }
   }, [prompts, getPrompts])
 
-  console.log(prompts);
-
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });
   };
@@ -103,22 +101,22 @@ const PromptBuilder = () => {
     <div className='page'>
 
       {(imageData || isLoading) && (
-        <div className="image__container">
+        <div className="results">
           {isLoading && <Loader />}
           {imageData && (
-        <div className='results'>
-        <div className='history__collection'>
-          <div className='history__images'>
+        <div className='results__container'>
+        <div className='results__collection'>
+          <div className='results__images'>
             {imageData.map((image, i) => (
               <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
             ))}
           </div>
-          <div className='history__prompt'>
+          <div className='results__prompt'>
             <p>{inputs.prompt}</p>
           </div>
               </div>
           <button onClick={(e) => reset(e)}>Try again?</button>
-              </div>
+        </div>
           )}
 
         </div>
@@ -170,9 +168,11 @@ const PromptBuilder = () => {
                 onKeyDown={(e) => handleEnterKey(e)}
                 />
               <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
+              <div className='lower__options'>
             <ResultsCount handleChange={handleFormFieldChange} />
             <SizeSlider handleChange={handleFormFieldChange} />
-            <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                </div>
           </div>
 
         </div>

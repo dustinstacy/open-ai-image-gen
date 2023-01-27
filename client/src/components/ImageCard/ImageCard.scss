@@ -89,4 +89,16 @@
 
 }
 
+@media screen and (max-width: 1200px) {
+.card {
+        width: 250px;
+        height: 250px;
+}
+}
 
+@media screen and (max-width: 1000px) {
+    .card {
+        width: 200px;
+        height: 200px;
+    }
+}
