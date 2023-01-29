@@ -52,7 +52,7 @@
             align-items: center;
             justify-content: flex-start;
             margin-bottom: .5rem;
-            background-color: var(--tertiary-color);
+            background-color: var(--black-color);
             border-radius: 1rem;
             color: var(--secondary-color);
 
@@ -91,7 +91,7 @@
 
 @media screen and (max-width: 1200px) {
     .card {
-        height: 35vw;
-        width: 35vw;
+        height: 33vw;
+        width: 33vw;
     }
 }

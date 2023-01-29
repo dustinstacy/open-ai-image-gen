@@ -4,10 +4,10 @@ import './SizeSlider.scss'
 
 const SizeSlider = ({handleChange}) => {
     return (
-        <div className="size__div">
+        <div className="size__slider">
             <label>Size:</label>
             <input
-                className="slider"
+                className="range"
                 type='range'
                 min='1'
                 max='3'

@@ -1,17 +1,19 @@
 .loader {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
+
+
+    &__image {
+        height: 60%;
+    }
+
+    &__text {
+        font-size: 2rem;
+    }
 }
 
-.loader__image {
-    height: 100%;
-}
-
-.loader__text {
-    font-size: 2rem;
-}

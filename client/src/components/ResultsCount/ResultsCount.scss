@@ -1,7 +1,13 @@
-.count {
-    width: 42px;
-    margin: 0 1rem;
-    font-size: 1rem;
-    text-align: center;
-    line-height: 2rem;
+.results__count {
+    text-align: right;
+
+    .count {
+        max-width: 40px;
+        width: 3rem;
+        margin-left: .5vw;
+        font-size: 1rem;
+        text-align: center;
+        line-height: 2rem;
+    }
 }
+

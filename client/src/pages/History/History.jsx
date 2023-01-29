@@ -50,6 +50,7 @@ const History = () => {
           <div className='history'>
             <div className='history__header'>
               <h1>Prompt History</h1>
+              <hr/>
               <button className={filterFavorites ? "filtered" : ""} onClick={(e) => handleFilterFavorites(e) }>Favorites</button>
             </div>
             {currentResults.map((history) => (
