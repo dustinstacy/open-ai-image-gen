@@ -127,17 +127,17 @@ const PromptBuilder = () => {
         <div className='builder__container'>
       <Tabs>
         <TabList>
-          {categories.map((category, i) => (
-            <Tab key={category + i}>{category}</Tab>
+          {categories.map((category) => (
+            <Tab key={category}>{category}</Tab>
           ))}
         </TabList>
 
         {categories.map((category, i) => (
-          <TabPanel key={(category)}>
+          <TabPanel key={(category + i)}>
             {prompts.map((prompt) => {
               return prompt.category === category ?
                 <PromptCard
-                  key={prompt._id}
+                  key={prompt.prompt}
                   id={prompt._id}
                   title={prompt.prompt}
                   image={prompt.imgUrl}

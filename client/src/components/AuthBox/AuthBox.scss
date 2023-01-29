@@ -1,19 +1,19 @@
 .auth {
+    height: calc(100vh - var(--navbar-height));
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-    margin-top: 6rem;
 
     &__box {
     max-width: 480px;
-    width: 100%;
-    padding: 24px 48px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    border: 2px solid var(--secondary-color);
-    border-radius: 6px;
+    width: 50vw;
+    padding: 2rem 4rem;
+    background-color: var(--white-color);
+    border: 3px solid var(--primary-color);
+    border-radius: .5rem;
+    color: var(--primary-color);
     }
 
     &__title {
@@ -21,19 +21,18 @@
     }
 
     &__field {
-        margin-bottom: 20px;
-
+        margin-bottom: 1rem;
 
         label{
-            font-size: 1.5rem;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: .5rem;
+            font-size: 1.5rem;
         }
 
         input {
-            background-color: var(--lightGray-color);
             width: 95%;
-            padding: 10px;
+            padding: .75rem;
+            background-color: var(--lightGray-color);
             border-radius: 6px;
             font-size: 1rem;
             color: var(--black-color);
@@ -47,28 +46,28 @@
     &__footer {
         button {
             width: 100%;
-            margin-top: 24px;
+            margin-top: 2rem;
         }
 
         .auth__error{
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-top: 10px;
+            margin-top: 1rem;
             margin-bottom: 0;
             color: var(--tertiary-color);
+            font-size: 1.5rem;
+            font-weight: 600;
             text-align: center;
         }
     }
 
     &__error {
-        font-size: 1rem;
-        margin-top: 10px;
+        margin-top: 1rem;
         color: var(--tertiary-color);
+        font-size: 1rem;
     }
 
     &__register {
-        text-align: center;
         margin-top: 1rem;
+        text-align: center;
 
         a{
         color: var(--tertiary-color);
@@ -76,5 +75,16 @@
         }
     }
 
+    .footer {
+        position: fixed;
+    }
+}
 
+@media screen and (max-width: 600px) {
+    .auth {
+
+        &__box {
+            padding: 2rem 2rem;
+        }
+    }
 }

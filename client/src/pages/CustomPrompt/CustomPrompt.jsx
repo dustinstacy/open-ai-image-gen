@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Loader, SizeSlider, ResultsCount, ImageCard } from "../../components";
+import { Loader, SizeSlider, ResultsCount, ImageCard, Footer } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
 import { useGlobalContext } from "../../context/GlobalContext";
 
@@ -42,7 +42,6 @@ useEffect(() => {
 }, [imageRetrieved, user, inputs, imageData])
 
     return (
-        <div className="page">
             <div className="custom__container">
             <div className="image__container">
                 {isLoading && <Loader />}
@@ -64,9 +63,9 @@ useEffect(() => {
                 <ResultsCount handleChange={handleFormFieldChange} />
                 <SizeSlider handleChange={handleFormFieldChange} />
                 <button type="submit">Generate</button>
-                </form>
+            </form>
+            <Footer />
             </div>
-        </div>
     )
 }
 
