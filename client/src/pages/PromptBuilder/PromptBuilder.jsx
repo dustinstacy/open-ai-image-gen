@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
 import { PromptCard, ResultsCount, SizeSlider, Loader, ImageCard} from '../../components'
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
-import { promptArrays, categories } from '../../data';
 
 import './PromptBuilder.scss'
 import { useGlobalContext } from '../../context/GlobalContext';
 
 
 const PromptBuilder = () => {
-  const { user, promptHistory } = useGlobalContext();
-
+  const { user, prompts, getPrompts } = useGlobalContext();
   const [inputs, setInputs] = useState({
     prompt: '',
     count: "1",
@@ -25,6 +23,13 @@ const PromptBuilder = () => {
   const [imageData, setImageData] = useState(null)
 
   const promptBuild = selectedPrompts.join(" ")
+  const categories = ["Subjects", "Environment", "Detail", "Style", "Artists", "Lighting", "Quality & View"];
+
+  useEffect(() => {
+    if (prompts.length === 0) {
+      getPrompts();
+    }
+  }, [prompts, getPrompts])
 
   const handleFormFieldChange = (fieldName, e) => {
     setInputs({ ...inputs, [fieldName]: e.target.value });
@@ -32,14 +37,14 @@ const PromptBuilder = () => {
 
   const handleClick = (prompt, e) => {
     const activePrompt = document.getElementById(prompt)
-    const value = prompt.name;
+    const value = prompt.prompt;
 
     if (selectedPrompts.includes(prompt)) {
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt));
       activePrompt.classList.remove('active__prompt');
-    } else if (selectedPrompts.includes(prompt.name)) {
+    } else if (selectedPrompts.includes(prompt.prompt)) {
       e.target.classList.remove('active__prompt')
-      setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.name));
+      setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.prompt));
     } else {
       e.target.classList.add('active__prompt');
       setSelectedPrompts([...selectedPrompts, value]);
@@ -96,22 +101,22 @@ const PromptBuilder = () => {
     <div className='page'>
 
       {(imageData || isLoading) && (
-        <div className="image__container">
+        <div className="results">
           {isLoading && <Loader />}
           {imageData && (
-        <div className='results'>
-        <div className='history__collection'>
-          <div className='history__images'>
+        <div className='results__container'>
+        <div className='results__collection'>
+          <div className='results__images'>
             {imageData.map((image, i) => (
               <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
             ))}
           </div>
-          <div className='history__prompt'>
+          <div className='results__prompt'>
             <p>{inputs.prompt}</p>
           </div>
               </div>
           <button onClick={(e) => reset(e)}>Try again?</button>
-              </div>
+        </div>
           )}
 
         </div>
@@ -122,22 +127,25 @@ const PromptBuilder = () => {
         <div className='builder__container'>
       <Tabs>
         <TabList>
-          {categories.map((category, i) => (
+          {categories.map((category) => (
             <Tab key={category}>{category}</Tab>
           ))}
         </TabList>
 
-        {promptArrays.map((category, i) => (
-          <TabPanel key={i}>
-            {category.map((prompt) => (
+        {categories.map((category, i) => (
+          <TabPanel key={(category + i)}>
+            {prompts.map((prompt) => {
+              return prompt.category === category ?
                 <PromptCard
-                  key={prompt.name}
-                  id={prompt.name}
-                  title={prompt.name}
+                  key={prompt.prompt}
+                  id={prompt._id}
+                  title={prompt.prompt}
                   image={prompt.imgUrl}
                   handleClick={(e) => handleClick(prompt, e)}
                 />
-            ))}
+                :
+                <></>
+            })}
           </TabPanel>
         ))}
               </Tabs>
@@ -160,9 +168,11 @@ const PromptBuilder = () => {
                 onKeyDown={(e) => handleEnterKey(e)}
                 />
               <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
+              <div className='lower__options'>
             <ResultsCount handleChange={handleFormFieldChange} />
             <SizeSlider handleChange={handleFormFieldChange} />
-            <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                </div>
           </div>
 
         </div>

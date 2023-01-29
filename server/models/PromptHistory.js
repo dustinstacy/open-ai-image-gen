@@ -17,6 +17,7 @@ const PromptHistorySchema = new Schema(
     images: [
       {
         type: String,
+        required: true,
       },
     ],
     favorite: {

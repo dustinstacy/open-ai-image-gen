@@ -31,18 +31,18 @@ const Paginate = ({ resultsPerPage, results, paginate, currentPage, setCurrentPa
 
   return (
     <div className='pagination'>
-          <ul className='pagination__container'>
-              <li onClick={previousPage} className={`"pagination__number" ${currentPage === 1 ? "disabled" : ""}`}>
-                  <BsFillArrowLeftCircleFill className='arrow'/>
-              </li>
-              {pageNumbers.map((number) => (
-                  <li key={number} onClick={() => paginate(number)} className={`pagination__number ${number === currentPage ? "active" : ""}`}>
-                      {number}
-                  </li>
-              ))}
-              <li onClick={nextPage} className={`"pagination__number" ${currentPage === pageNumbers[pageNumbers.length - 1] ? "disabled" : ""}`}>
-                  <BsFillArrowRightCircleFill className='arrow'/>
-              </li>
+        <ul className='pagination__container'>
+            <li onClick={previousPage} className={`"pagination__number" ${currentPage === 1 ? "disabled" : ""}`}>
+                <BsFillArrowLeftCircleFill className='arrow'/>
+            </li>
+            {pageNumbers.map((number) => (
+                <li key={number} onClick={() => paginate(number)} className={`pagination__number ${number === currentPage ? "active" : ""}`}>
+                    {number}
+                </li>
+            ))}
+            <li onClick={nextPage} className={`"pagination__number" ${currentPage === pageNumbers[pageNumbers.length - 1] ? "disabled" : ""}`}>
+                <BsFillArrowRightCircleFill className='arrow'/>
+            </li>
         </ul>
     </div>
   )

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Loader, SizeSlider, ResultsCount, ImageCard } from "../../components";
+import { Loader, SizeSlider, ResultsCount, ImageCard, Footer } from "../../components";
 import { fetchResults, integerConversion, sizeConversion } from "../../utils";
 import { useGlobalContext } from "../../context/GlobalContext";
 
@@ -34,37 +34,47 @@ const CustomPrompt = () => {
         fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading });
     }
 
-useEffect(() => {
-    if (user && imageRetrieved) {
-        setImageRetrieved(false);
-        axios.post("/api/history/new", { user: user._id, name: user.name, prompt: inputs.prompt, images: imageData });
-    }
-}, [imageRetrieved, user, inputs, imageData])
+    useEffect(() => {
+        if (user && imageRetrieved) {
+            setImageRetrieved(false);
+            axios.post("/api/history/new", { user: user._id, name: user.name, prompt: inputs.prompt, images: imageData });
+        }
+    }, [imageRetrieved, user, inputs, imageData])
 
     return (
-        <div className="page">
-            <div className="custom__container">
-            <div className="image__container">
-                {isLoading && <Loader />}
-                { imageData &&  (
-                    imageData.map((image, idx) => (
-                         <ImageCard id={image + idx} prompt={inputs.prompt} image={image} name={user.name} key={image} />
-                    )
-                ))}
-            </div>
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="prompt__input">
-                <label>Enter your prompt:</label>
-                <input
-                    type="text"
-                    placeholder="What will you discover?"
-                    onChange={(e) => handleFormFieldChange('prompt', e)}
-                />
+        <div className="custom__container">
+            <div className="custom">
+                <div className="image__container">
+                    {isLoading && <Loader />}
+                    {imageData && (
+                        <div className='history__collection'>
+                            <div className='history__images'>
+                                {imageData.map((image, i) => (
+                                    <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
+                                ))}
+                            </div>
+                            <div className='history__prompt'>
+                                <p>{inputs.prompt}</p>
+                            </div>
+                        </div>
+                    )}
                 </div>
-                <ResultsCount handleChange={handleFormFieldChange} />
-                <SizeSlider handleChange={handleFormFieldChange} />
-                <button type="submit">Generate</button>
+                <form className="form" onSubmit={handleSubmit}>
+                    <div className="form__prompt">
+                        <label>Enter your prompt:</label>
+                        <input
+                            type="text"
+                            placeholder="What will you discover?"
+                            onChange={(e) => handleFormFieldChange('prompt', e)}
+                        />
+                    </div>
+                    <div className="form__inputs">
+                        <ResultsCount handleChange={handleFormFieldChange} />
+                        <SizeSlider handleChange={handleFormFieldChange} />
+                        <button type="submit">Generate</button>
+                    </div>
                 </form>
+                <Footer />
             </div>
         </div>
     )

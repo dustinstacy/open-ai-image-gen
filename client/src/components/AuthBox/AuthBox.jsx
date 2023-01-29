@@ -5,11 +5,11 @@ import axios from "axios";
 import { useGlobalContext } from "../../context/GlobalContext";
 
 import "./AuthBox.scss"
+import Footer from "../Footer/Footer";
 
 const AuthBox = ({ register }) => {
   const navigate = useNavigate();
   const { getCurrentUser, user} = useGlobalContext();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +18,7 @@ const AuthBox = ({ register }) => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (user && navigate) {
+    if (user) {
       navigate("/");
 
     }
@@ -55,7 +55,8 @@ const AuthBox = ({ register }) => {
           console.log(error);
           setErrors(error.response.data);
         }
-      })
+      }
+    )
   }
 
 
@@ -65,7 +66,6 @@ const AuthBox = ({ register }) => {
         <div className="auth__title">
           <h1>{register ? "Register" : "Login"}</h1>
         </div>
-
         <form onSubmit={onSubmit}>
           {register && (
             <div className="auth__field">
@@ -76,7 +76,6 @@ const AuthBox = ({ register }) => {
               )}
             </div>
           )}
-
           <div className="auth__field">
             <label>Email</label>
             <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -84,7 +83,6 @@ const AuthBox = ({ register }) => {
                 <p className="auth__error">{errors.email}</p>
               )}
           </div>
-
           <div className="auth__field">
             <label>Password</label>
             <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -92,7 +90,6 @@ const AuthBox = ({ register }) => {
                 <p className="auth__error">{errors.password}</p>
               )}
           </div>
-
           {register && (
             <div className="auth__field">
               <label>Confirm Password</label>
@@ -102,7 +99,6 @@ const AuthBox = ({ register }) => {
               )}
             </div>
           )}
-
           <div className="auth__footer">
             {Object.keys(errors).length > 0 && (
               <p className="auth__error">{register ? "Information could not be validated" : "That's not right"}</p>
@@ -119,6 +115,7 @@ const AuthBox = ({ register }) => {
           </div>
         }
       </div>
+      <Footer />
     </div>
   );
 };

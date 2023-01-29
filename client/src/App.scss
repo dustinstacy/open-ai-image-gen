@@ -13,17 +13,14 @@
 }
 
 * {
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
 body,
 html{
-  font-family: "Prompt";
-  min-height: 100vh;
   background-color: var(--gray-color);
-  overflow: hidden;
+  font-family: "Prompt";
 }
 
 ::-webkit-scrollbar {
@@ -100,11 +97,6 @@ button {
   }
 }
 
-.image__container {
-  margin-top: 64px;
-  height: calc(100vh - (var(--navbar-height) + var(--footer-height)));
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+label {
+  font-weight: 500;
 }

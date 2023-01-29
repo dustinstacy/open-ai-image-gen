@@ -1,6 +1,6 @@
 .navbar {
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top:0;
     right: 0;
     left: 0;
@@ -12,9 +12,8 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px, rgba(0, 0, 0, 0.2) 0px 7px 13px -3px, rgba(0, 0, 0, 0.1) 0px -3px 0px inset;
 
     img {
-        width: 22.5vw;
-        height: 64px;
-        object-fit: cover;
+        width: 20vw;
+        max-width: 400px;
         cursor: pointer;
     }
 
