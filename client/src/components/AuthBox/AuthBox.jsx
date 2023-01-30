@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 import axios from 'axios'
 
 import { useGlobalContext } from '../../context/GlobalContext'
+import { Footer } from '../../components'
 
 import './AuthBox.scss'
-import Footer from '../Footer/Footer'
 
 const AuthBox = ({ register }) => {
 	const navigate = useNavigate()
@@ -14,11 +15,14 @@ const AuthBox = ({ register }) => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [confirmPassword, setConfirmPassword] = useState('')
+	const [passwordVisisble, setPasswordVisisble] = useState(false)
+	const [confirmPasswordVisisble, setConfirmPasswordVisisble] =
+		useState(false)
 	const [loading, setLoading] = useState(false)
 	const [errors, setErrors] = useState({})
 
 	useEffect(() => {
-		if (user && navigate) {
+		if (user) {
 			getCurrentUser()
 			navigate('/home')
 		}
@@ -26,10 +30,12 @@ const AuthBox = ({ register }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
+		// used to disable multiple submissions
 		setLoading(true)
 
 		let data = {}
 
+		// values gathered from user input
 		if (register) {
 			data = {
 				name,
@@ -73,6 +79,7 @@ const AuthBox = ({ register }) => {
 								type='text'
 								value={name}
 								onChange={(e) => setName(e.target.value)}
+								autoFocus
 							/>
 							{errors.name && (
 								<p className='auth__error'>{errors.name}</p>
@@ -85,6 +92,7 @@ const AuthBox = ({ register }) => {
 							type='text'
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							autoFocus
 						/>
 						{errors.email && (
 							<p className='auth__error'>{errors.email}</p>
@@ -92,11 +100,30 @@ const AuthBox = ({ register }) => {
 					</div>
 					<div className='auth__field'>
 						<label>Password</label>
-						<input
-							type='text'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+						<div className='password'>
+							<input
+								type={passwordVisisble ? 'text' : 'password'}
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							{passwordVisisble ? (
+								<AiFillEye
+									onClick={() =>
+										setPasswordVisisble(
+											(current) => !current
+										)
+									}
+								/>
+							) : (
+								<AiFillEyeInvisible
+									onClick={() =>
+										setPasswordVisisble(
+											(current) => !current
+										)
+									}
+								/>
+							)}
+						</div>
 						{errors.password && (
 							<p className='auth__error'>{errors.password}</p>
 						)}
@@ -104,13 +131,36 @@ const AuthBox = ({ register }) => {
 					{register && (
 						<div className='auth__field'>
 							<label>Confirm Password</label>
-							<input
-								type='text'
-								value={confirmPassword}
-								onChange={(e) =>
-									setConfirmPassword(e.target.value)
-								}
-							/>
+							<div className='password'>
+								<input
+									type={
+										confirmPasswordVisisble
+											? 'text'
+											: 'password'
+									}
+									value={confirmPassword}
+									onChange={(e) =>
+										setConfirmPassword(e.target.value)
+									}
+								/>
+								{confirmPasswordVisisble ? (
+									<AiFillEye
+										onClick={() =>
+											setConfirmPasswordVisisble(
+												(current) => !current
+											)
+										}
+									/>
+								) : (
+									<AiFillEyeInvisible
+										onClick={() =>
+											setConfirmPasswordVisisble(
+												(current) => !current
+											)
+										}
+									/>
+								)}
+							</div>
 							{errors.confirmPassword && (
 								<p className='auth__error'>
 									{errors.confirmPassword}
