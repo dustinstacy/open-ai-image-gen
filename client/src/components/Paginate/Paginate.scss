@@ -1,81 +1,78 @@
 .pagination {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    &__container {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4vw;
-        margin-top: 2rem;
-        margin-bottom: 4rem;
-        list-style: none;
-        font-size: 1.75rem;
-        text-align: center;
-    }
+	&__container {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 4vw;
+		margin-top: 2rem;
+		margin-bottom: 4rem;
+		list-style: none;
+		font-size: 1.75rem;
+		text-align: center;
+	}
 
-    &__number {
-        width: 1vw;
-        margin-top: -.5rem;
-        color: var(--tertiary-color);
-        cursor: pointer;
-    }
+	&__number {
+		width: 1vw;
+		margin-top: -0.5rem;
+		color: var(--tertiary-color);
+		cursor: pointer;
+	}
 
-    .active {
-        color: var(--secondary-color);
-    }
+	.active {
+		color: var(--secondary-color);
+	}
 
-    .disabled {
-        opacity: 50%;
-        pointer-events: none;
-    }
+	.disabled {
+		opacity: 50%;
+		pointer-events: none;
+	}
 
-    .arrow {
-        color: var(--tertiary-color);
-        cursor: pointer;
-    }
+	.arrow {
+		color: var(--tertiary-color);
+		cursor: pointer;
+	}
 }
 
 @media screen and (max-width: 1200px) {
-    .pagination {
-
-        &__container {
-            gap: 6vw;
-        }
-    }
+	.pagination {
+		&__container {
+			gap: 6vw;
+		}
+	}
 }
 
 @media screen and (max-width: 900px) {
-    .pagination {
+	.pagination {
+		&__number {
+			margin-top: -0.25rem;
+			font-size: 1.25rem;
+		}
 
-        &__number {
-            margin-top: -.25rem;
-            font-size: 1.25rem;
-        }
-
-        .arrow {
-            font-size: 1.5rem;
-        }
-    }
+		.arrow {
+			font-size: 1.5rem;
+		}
+	}
 }
 
 @media screen and (max-width: 600px) {
-    .pagination {
+	.pagination {
+		&__container {
+			margin-top: 1rem;
+		}
 
-        &__container {
-            margin-top: 1rem;
-        }
+		&__number {
+			margin-top: 0;
+			font-size: 1rem;
+		}
 
-        &__number {
-            margin-top: 0;
-            font-size: 1rem;
-        }
-
-        .arrow {
-            font-size: 1.25rem;
-        }
-    }
+		.arrow {
+			font-size: 1.25rem;
+		}
+	}
 }
