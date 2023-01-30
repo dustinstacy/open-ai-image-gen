@@ -13,9 +13,7 @@ const NavBar = () => {
 
   return (
     <div className='navbar'>
-      <NavLink to="/">
-        <img src={logo} alt="logo" />
-      </NavLink>
+      <img src={logo} alt="logo" />
       <div className='navbar__links'>
         {navlinks.map((link) => {
           if (!user && link.name === "History") {

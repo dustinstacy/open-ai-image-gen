@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 import { CgCloseR } from 'react-icons/cg';
 
-import { PromptCard, ResultsCount, SizeSlider, Loader, ImageCard} from '../../components'
+import { PromptCard, ResultsCount, SizeSlider, Loader, ImageCard, Footer} from '../../components'
 import { sizeConversion, integerConversion, fetchResults } from '../../utils';
 
 import './PromptBuilder.scss'
@@ -42,7 +42,7 @@ const PromptBuilder = () => {
     if (selectedPrompts.includes(prompt)) {
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt));
       activePrompt.classList.remove('active__prompt');
-    } else if (selectedPrompts.includes(prompt.prompt)) {
+    } else if (selectedPrompts.includes(prompt)) {
       e.target.classList.remove('active__prompt')
       setSelectedPrompts(selectedPrompts.filter((prompts) => prompts !== prompt.prompt));
     } else {
@@ -98,86 +98,99 @@ const PromptBuilder = () => {
 
 
   return (
-    <div className='page'>
-
+    <div className='builder__container'>
       {(imageData || isLoading) && (
         <div className="results">
           {isLoading && <Loader />}
           {imageData && (
-        <div className='results__container'>
-        <div className='results__collection'>
-          <div className='results__images'>
-            {imageData.map((image, i) => (
-              <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
-            ))}
+            <div className='results__container'>
+                        <div className='history__collection'>
+                            <div className='history__images'>
+                                {imageData.map((image, i) => (
+                                    <ImageCard id={image.slice(-10)} prompt={inputs.prompt} name={user.name} image={image} key={image} />
+                                ))}
+                            </div>
+                            <div className='history__prompt'>
+                                <p>{inputs.prompt}</p>
+                            </div>
+                        </div>
+              <button onClick={(e) => reset(e)}>Try again?</button>
+                                  <Footer />
           </div>
-          <div className='results__prompt'>
-            <p>{inputs.prompt}</p>
-          </div>
-              </div>
-          <button onClick={(e) => reset(e)}>Try again?</button>
-        </div>
           )}
 
         </div>
       )}
 
-
       {!imageData && !isLoading && (
-        <div className='builder__container'>
-      <Tabs>
-        <TabList>
-          {categories.map((category) => (
-            <Tab key={category}>{category}</Tab>
-          ))}
-        </TabList>
-
-        {categories.map((category, i) => (
-          <TabPanel key={(category + i)}>
-            {prompts.map((prompt) => {
-              return prompt.category === category ?
-                <PromptCard
-                  key={prompt.prompt}
-                  id={prompt._id}
-                  title={prompt.prompt}
-                  image={prompt.imgUrl}
-                  handleClick={(e) => handleClick(prompt, e)}
-                />
-                :
-                <></>
-            })}
-          </TabPanel>
-        ))}
+        <div className='container'>
+          <div className='builder'>
+            <div className='prompt__selector'>
+              <Tabs>
+                <TabList>
+                  {categories.map((category, i) => (
+                    <Tab key={category}>{category}</Tab>
+                  ))}
+                </TabList>
+                {categories.map((category, i) => (
+                  <TabPanel key={(category + i)}>
+                    {prompts.map((prompt) => {
+                      return prompt.category === category ?
+                        <PromptCard
+                          key={prompt.prompt}
+                          id={prompt.prompt}
+                          title={prompt.prompt}
+                          image={prompt.imgUrl}
+                          handleClick={(e) => handleClick(prompt, e)}
+                        />
+                      :
+                        <></>
+                    })}
+                  </TabPanel>
+                ))}
               </Tabs>
+            </div>
+            <div className='collector__container'>
+              <div className='tips'>
+                <h1>Prompt Builder Tips</h1>
+                <ul>
+                  <li>Tip 1</li>
+                  <li>Tip 2</li>
+                  <li>Tip 3</li>
+                </ul>
+              </div>
               <div className='prompt__collector'>
-          <h2>Prompt Collector</h2>
-          <ul className='selected__prompts'>
-          {selectedPrompts?.map((prompt) => (
-            <li key={prompt} className="prompt">
-              {prompt}
-              <CgCloseR className='delete' onClick={(e) => handleClick(prompt, e)} />
-            </li>
-          ))}
-          </ul>
-            <div className='options'>
-            <label>Add your own prompt:</label>
-              <input
-                className="add__prompt"
-                type="text"
-                id="custom__prompt"
-                onKeyDown={(e) => handleEnterKey(e)}
-                />
-              <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
-              <div className='lower__options'>
-            <ResultsCount handleChange={handleFormFieldChange} />
-            <SizeSlider handleChange={handleFormFieldChange} />
-                <button type="button" onClick={(e) => handleSubmit(e)}>Submit</button>
+                <h2>Prompt Collector</h2>
+                <ul className='selected__prompts'>
+                  {selectedPrompts?.map((prompt) => (
+                    <li key={prompt} className="prompt">
+                      {prompt}
+                      <CgCloseR className='delete' onClick={(e) => handleClick(prompt, e)} />
+                    </li>
+                  ))}
+                </ul>
+                <div className='options'>
+                  <div className='options__prompt'>
+                    <label>Add your own prompt:</label>
+                    <input
+                      className="add__input"
+                      type="text"
+                      id="custom__prompt"
+                      onKeyDown={(e) => handleEnterKey(e)}
+                    />
+                    <button type="button" className='add' onClick={() => addCustomPrompt()}>+</button>
+                  </div>
+                  <div className="options__inputs">
+                      <ResultsCount handleChange={handleFormFieldChange} />
+                      <SizeSlider handleChange={handleFormFieldChange} />
+                      <button type="button" onClick={(e) => handleSubmit(e)}>Generate</button>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <Footer />
           </div>
-
         </div>
-
-          </div>
       )}
     </div>
   )
