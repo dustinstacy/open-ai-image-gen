@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: flex-end;
     margin-top: var(--navbar-height);
-    overflow-y: auto;
+    overflow-y: scroll;
 
     .footer {
         position: relative;
@@ -88,7 +88,7 @@
 
 @media screen and (max-width: 1200px) {
     .custom__container {
-            height: calc(100% - (var(--navbar-height)));
+            height: calc(100% - var(--navbar-height));
     }
 
 
