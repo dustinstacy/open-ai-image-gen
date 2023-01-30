@@ -51,6 +51,7 @@ export const GlobalProvider = ({ children }) => {
 	useEffect(() => {
 		getCurrentUser()
 		getPrompts()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const getPrompts = async () => {
