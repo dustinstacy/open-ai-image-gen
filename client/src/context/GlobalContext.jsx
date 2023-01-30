@@ -50,6 +50,7 @@ export const GlobalProvider = ({ children }) => {
 
 	useEffect(() => {
 		getCurrentUser()
+		getPrompts()
 	}, [])
 
 	const getPrompts = async () => {
@@ -89,7 +90,8 @@ export const GlobalProvider = ({ children }) => {
 				dispatch({ type: 'RESET_USER' })
 			}
 		} catch (error) {
-			console.log(error)
+			console.log(error, 'No User')
+			dispatch({ type: 'RESET_USER' })
 		}
 	}
 

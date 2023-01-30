@@ -13,12 +13,12 @@ const App = () => {
 			<Router>
 				<NavBar />
 				<Routes>
-					<Route path='/' element={<Home />} />
+					<Route path='/' element={<AuthBox />} />
+					<Route path='/register' element={<AuthBox register />} />
+					<Route path='/home' element={<Home />} />
 					<Route path='/prompt-builder' element={<PromptBuilder />} />
 					<Route path='/custom-prompt' element={<CustomPrompt />} />
 					<Route path='/history' element={<History />} />
-					<Route path='/login' element={<AuthBox />} />
-					<Route path='/register' element={<AuthBox register />} />
 				</Routes>
 			</Router>
 		</GlobalProvider>

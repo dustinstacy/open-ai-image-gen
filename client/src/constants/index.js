@@ -3,7 +3,7 @@ import { custom, history, builder } from '../assets'
 export const navlinks = [
 	{
 		name: 'Home',
-		link: '/',
+		link: '/home',
 	},
 	{
 		name: 'Prompt Builder',

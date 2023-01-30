@@ -127,7 +127,7 @@ const PromptBuilder = () => {
 						<div className='results__container'>
 							<div className='history__collection'>
 								<div className='history__images'>
-									{imageData.map((image, i) => (
+									{imageData?.map((image, i) => (
 										<ImageCard
 											id={image.slice(-10)}
 											prompt={inputs.prompt}

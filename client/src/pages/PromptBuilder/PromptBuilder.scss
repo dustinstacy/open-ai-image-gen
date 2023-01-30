@@ -14,7 +14,7 @@
 	flex-direction: column;
 	align-items: center;
 	overflow-y: scroll;
-	z-index: 2;
+	z-index: 1;
 
 	.footer {
 		z-index: -1;
@@ -280,13 +280,14 @@
 		.container {
 			.builder {
 				flex-direction: column;
+				align-items: center;
 				justify-content: flex-start;
 
 				.prompt__selector {
 					min-height: 400px;
 
 					.react-tabs {
-						width: 87.5vw;
+						width: 90vw;
 
 						.react-tabs__tab {
 							font-size: 1.5vw;
