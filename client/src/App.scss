@@ -1,102 +1,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary-color: #1a8fe3;
-  --secondary-color: #b0fe0b;
-  --tertiary-color: #57467b;
-  --white-color: #fbfbfd;
-  --black-color: #060606;
-  --lightGray-color: #e6e6e6;
-  --gray-color: #a6adb5;
-  --navbar-height: 64px;
-  --footer-height: 80px;
+	--primary-color: #1a8fe3;
+	--secondary-color: #b0fe0b;
+	--tertiary-color: #57467b;
+	--white-color: #fbfbfd;
+	--black-color: #060606;
+	--lightGray-color: #e6e6e6;
+	--gray-color: #a6adb5;
+	--navbar-height: 64px;
+	--footer-height: 80px;
 }
 
 * {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 body,
-html{
-  background-color: var(--gray-color);
-  font-family: "Prompt";
+html {
+	background-color: var(--gray-color);
+	font-family: 'Prompt';
 }
 
 ::-webkit-scrollbar {
-  width: 18px;
+	width: 18px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  border-radius: 8px;
+	border-radius: 8px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  background-clip: padding-box;
-  border: 3px solid var(--gray-color);
-  border-radius: 8px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+	background: var(--primary-color);
+	background-clip: padding-box;
+	border: 3px solid var(--gray-color);
+	border-radius: 8px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--tertiary-color);
+	background: var(--tertiary-color);
 }
 
 a {
-  color: var(--primary-color);
-  font-weight: 500;
-  text-decoration: none;
+	color: var(--primary-color);
+	font-weight: 500;
+	text-decoration: none;
 
-  &:hover {
-    color: var(--secondary-color);
-    text-shadow: 1px 0px 2px rgba(25, 25, 25, 0.5),
-        1px 0px 2px rgba(25, 25, 25, 0.5),
-        0px -1px 2px rgba(25, 25, 25, 0.5),
-        0px 1px 2px rgba(25, 25, 25, 0.5);
-  }
+	&:hover {
+		color: var(--secondary-color);
+		text-shadow: 1px 0px 2px rgba(25, 25, 25, 0.5),
+			1px 0px 2px rgba(25, 25, 25, 0.5),
+			0px -1px 2px rgba(25, 25, 25, 0.5),
+			0px 1px 2px rgba(25, 25, 25, 0.5);
+	}
 
-  &:disabled {
-    pointer-events: none;
-    opacity: .5;
-  }
+	&:disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
 }
 
 button {
-  padding: 0.5em 1em;
-  background-color: var(--tertiary-color);
-  border-radius: 8px;
-  border: 2px solid var(--primary-color);
-  color: var(--secondary-color);
-  font-size: 1.35em;
-  font-weight: 500;
-  font-family: inherit;
-  text-shadow: -1px 0px 2px rgba(25, 25, 25, 0.5),
-                1px 0px 2px rgba(25, 25, 25, 0.5),
-                0px -1px 2px rgba(25, 25, 25, 0.5),
-                0px 1px 2px rgba(25, 25, 25, 0.5);
-  transition: border-color 0.5s;
-  cursor: pointer;
+	padding: 0.5em 1em;
+	background-color: var(--tertiary-color);
+	border-radius: 8px;
+	border: 2px solid var(--primary-color);
+	color: var(--secondary-color);
+	font-size: 1.35em;
+	font-weight: 500;
+	font-family: inherit;
+	text-shadow: -1px 0px 2px rgba(25, 25, 25, 0.5),
+		1px 0px 2px rgba(25, 25, 25, 0.5), 0px -1px 2px rgba(25, 25, 25, 0.5),
+		0px 1px 2px rgba(25, 25, 25, 0.5);
+	transition: border-color 0.5s;
+	cursor: pointer;
 
-  &:hover {
-    background-color: var(--lightGray-color);
-    border-color: var(--primary-color);
-    color: var(--secondary-color);
-    text-shadow: -1px 0px 2px rgba(25, 25, 25, 0.5),
-                  1px 0px 2px rgba(25, 25, 25, 0.5),
-                  0px -1px 2px rgba(25, 25, 25, 0.5),
-                  0px 1px 2px rgba(25, 25, 25, 0.5);
-  }
+	&:hover {
+		background-color: var(--lightGray-color);
+		border-color: var(--primary-color);
+		color: var(--secondary-color);
+		text-shadow: -1px 0px 2px rgba(25, 25, 25, 0.5),
+			1px 0px 2px rgba(25, 25, 25, 0.5),
+			0px -1px 2px rgba(25, 25, 25, 0.5),
+			0px 1px 2px rgba(25, 25, 25, 0.5);
+	}
 
-  &:disabled {
-    pointer-events: none;
-    opacity: .5;
-  }
+	&:disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
 }
 
 label {
-  font-weight: 500;
+	font-weight: 500;
 }
