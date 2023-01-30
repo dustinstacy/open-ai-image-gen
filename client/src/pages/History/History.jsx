@@ -58,7 +58,7 @@ const History = () => {
 							Favorites
 						</button>
 					</div>
-					{currentResults.map((history) => (
+					{currentResults?.map((history) => (
 						<div className='history__collection' key={history._id}>
 							<div className='history__images'>
 								{history.images.map((image, i) => (

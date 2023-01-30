@@ -162,7 +162,7 @@ const PromptBuilder = () => {
 								</TabList>
 								{categories.map((category, i) => (
 									<TabPanel key={category + i}>
-										{prompts.map((prompt) => {
+										{prompts?.map((prompt) => {
 											return prompt.category ===
 												category ? (
 												<PromptCard
