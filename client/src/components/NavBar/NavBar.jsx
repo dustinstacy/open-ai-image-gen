@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { CgMenuHotdog, CgCloseR } from 'react-icons/cg'
-import { easeInOut, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import { useGlobalContext } from '../../context/GlobalContext'
 import { navlinks } from '../../constants'
