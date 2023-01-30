@@ -15,9 +15,7 @@ import { useGlobalContext } from '../../context/GlobalContext'
 import './CustomPrompt.scss'
 
 const CustomPrompt = () => {
-	const navigate = useNavigate()
-	const { user, getCurrentUser } = useGlobalContext()
-
+	const { user } = useGlobalContext()
 	const [inputs, setInputs] = useState({
 		prompt: '',
 		count: '1',
@@ -28,11 +26,6 @@ const CustomPrompt = () => {
 	const [imageRetrieved, setImageRetrieved] = useState(false)
 	const [convertedData, setConvertedData] = useState(null)
 
-	useEffect(() => {
-		getCurrentUser()
-		if (!user) navigate('/')
-	}, [user, navigate, getCurrentUser])
-
 	const handleFormFieldChange = (fieldName, e) => {
 		setInputs({ ...inputs, [fieldName]: e.target.value })
 	}
@@ -40,9 +33,9 @@ const CustomPrompt = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		setImageData(null)
-		setImageRetrieved(false)
 		setConvertedData(null)
 		setIsLoading(true)
+		setImageRetrieved(false)
 		integerConversion({ inputs })
 		sizeConversion({ inputs })
 		fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading })

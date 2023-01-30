@@ -1,5 +1,4 @@
 import React from 'react'
-import { BiCopyright } from 'react-icons/bi'
 
 import { openAI } from '../../assets'
 
@@ -13,9 +12,7 @@ const Footer = () => {
 				<img src={openAI} alt='open-ai' />
 			</div>
 			<div className='footer__info'>
-				<p>
-					<BiCopyright /> 2023 Dustin Stacy
-				</p>
+				<p>2023 Dustin Stacy</p>
 			</div>
 		</div>
 	)

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { CgCloseR } from 'react-icons/cg'
+import axios from 'axios'
 
 import {
 	PromptCard,
@@ -13,13 +12,12 @@ import {
 	Footer,
 } from '../../components'
 import { sizeConversion, integerConversion, fetchResults } from '../../utils'
-
-import './PromptBuilder.scss'
 import { useGlobalContext } from '../../context/GlobalContext'
 
+import './PromptBuilder.scss'
+
 const PromptBuilder = () => {
-	const navigate = useNavigate()
-	const { user, prompts, getCurrentUser } = useGlobalContext()
+	const { user, prompts } = useGlobalContext()
 	const [inputs, setInputs] = useState({
 		prompt: '',
 		count: '1',
@@ -41,10 +39,6 @@ const PromptBuilder = () => {
 		'Lighting',
 		'Quality & View',
 	]
-
-	// useEffect(() => {
-	// 	getCurrentUser()
-	// }, [user, navigate, getCurrentUser])
 
 	const handleFormFieldChange = (fieldName, e) => {
 		setInputs({ ...inputs, [fieldName]: e.target.value })

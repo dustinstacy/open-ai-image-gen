@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useGlobalContext } from '../../context/GlobalContext'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
+import axios from 'axios'
 
-import './History.scss'
+import { useGlobalContext } from '../../context/GlobalContext'
 import { Paginate, ImageCard, Footer } from '../../components'
 
+import './History.scss'
+
 const History = () => {
-	const navigate = useNavigate()
 	const { promptHistory, getCurrentUser, user } = useGlobalContext()
 	const [filterFavorites, setFilterFavorites] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
 	const resultsPerPage = 10
-
 	const indexOfLastResult = currentPage * resultsPerPage
 	const indexOfFirstResult = indexOfLastResult - resultsPerPage
 	const currentResults = !filterFavorites
@@ -21,11 +19,6 @@ const History = () => {
 		: promptHistory
 				.filter((history) => history.favorite === true)
 				.slice(indexOfFirstResult, indexOfLastResult)
-
-	useEffect(() => {
-		getCurrentUser()
-		if (!user) navigate('/')
-	}, [user, navigate, getCurrentUser])
 
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber)

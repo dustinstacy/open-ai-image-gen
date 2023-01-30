@@ -16,6 +16,7 @@ const Paginate = ({
 }) => {
 	const pageNumbers = []
 
+	// determine number of pages based on whether or not results are filterd
 	if (!filter) {
 		for (let i = 1; i <= Math.ceil(results.length / resultsPerPage); i++) {
 			pageNumbers.push(i)

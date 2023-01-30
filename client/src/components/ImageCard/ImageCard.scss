@@ -3,7 +3,7 @@
 	height: 20vw;
 	width: 20vw;
 	margin: 0.5rem;
-	border: 1px solid black;
+	border: 1px solid var(--black-color);
 
 	img {
 		height: 100%;
@@ -51,7 +51,8 @@
 			align-items: center;
 			justify-content: flex-start;
 			margin-bottom: 0.5rem;
-			background-color: var(--black-color);
+			background-color: var(--tertiary-color);
+			border: 2px solid var(--primary-color);
 			border-radius: 1rem;
 			color: var(--secondary-color);
 
