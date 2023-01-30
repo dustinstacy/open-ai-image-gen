@@ -1,5 +1,7 @@
-import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 
+import { useGlobalContext } from '../../context/GlobalContext'
 import { navlinks } from '../../constants'
 import { Footer } from '../../components'
 import './Home.scss'
@@ -13,6 +15,14 @@ const NavCard = ({ link }) => (
 )
 
 const Home = () => {
+	const navigate = useNavigate()
+	const { user, getCurrentUser } = useGlobalContext()
+
+	useEffect(() => {
+		getCurrentUser()
+		if (!user) navigate('/')
+	}, [user, navigate, getCurrentUser])
+
 	return (
 		<div className='home__container'>
 			<div className='navcards'>

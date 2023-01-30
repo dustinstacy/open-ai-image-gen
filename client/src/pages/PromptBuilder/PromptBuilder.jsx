@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { CgCloseR } from 'react-icons/cg'
 
@@ -17,7 +18,8 @@ import './PromptBuilder.scss'
 import { useGlobalContext } from '../../context/GlobalContext'
 
 const PromptBuilder = () => {
-	const { user, prompts, getPrompts } = useGlobalContext()
+	const navigate = useNavigate()
+	const { user, prompts, getCurrentUser } = useGlobalContext()
 	const [inputs, setInputs] = useState({
 		prompt: '',
 		count: '1',
@@ -27,6 +29,7 @@ const PromptBuilder = () => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [imageRetrieved, setImageRetrieved] = useState(false)
 	const [imageData, setImageData] = useState(null)
+	const [convertedData, setConvertedData] = useState(null)
 
 	const promptBuild = selectedPrompts.join(' ')
 	const categories = [
@@ -40,16 +43,15 @@ const PromptBuilder = () => {
 	]
 
 	// useEffect(() => {
-	// 	if (prompts.length === 0) {
-	// 		getPrompts()
-	// 	}
-	// }, [prompts, getPrompts])
+	// 	getCurrentUser()
+	// }, [user, navigate, getCurrentUser])
 
 	const handleFormFieldChange = (fieldName, e) => {
 		setInputs({ ...inputs, [fieldName]: e.target.value })
 	}
 
 	const handleClick = (prompt, e) => {
+		console.log(prompt)
 		const activePrompt = document.getElementById(prompt)
 		const value = prompt.prompt
 
@@ -58,7 +60,7 @@ const PromptBuilder = () => {
 				selectedPrompts.filter((prompts) => prompts !== prompt)
 			)
 			activePrompt.classList.remove('active__prompt')
-		} else if (selectedPrompts.includes(prompt)) {
+		} else if (selectedPrompts.includes(value)) {
 			e.target.classList.remove('active__prompt')
 			setSelectedPrompts(
 				selectedPrompts.filter((prompts) => prompts !== prompt.prompt)
@@ -93,7 +95,9 @@ const PromptBuilder = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		setImageData(null)
 		setImageRetrieved(false)
+		setConvertedData(null)
 		setIsLoading(true)
 		integerConversion({ inputs })
 		sizeConversion({ inputs })
@@ -103,12 +107,15 @@ const PromptBuilder = () => {
 	useEffect(() => {
 		if (user && imageRetrieved) {
 			setImageRetrieved(false)
-			axios.post('/api/history/new', {
-				user: user._id,
-				name: user.name,
-				prompt: inputs.prompt,
-				images: imageData,
-			})
+			axios
+				.post('/api/history/new', {
+					user: user._id,
+					name: user.name,
+					prompt: inputs.prompt,
+					images: imageData,
+				})
+				.then((res) => setConvertedData(res.data))
+			setIsLoading(false)
 		}
 	}, [imageRetrieved, user, inputs, imageData])
 
@@ -123,22 +130,22 @@ const PromptBuilder = () => {
 			{(imageData || isLoading) && (
 				<div className='results'>
 					{isLoading && <Loader />}
-					{imageData && (
+					{convertedData && (
 						<div className='results__container'>
 							<div className='history__collection'>
 								<div className='history__images'>
-									{imageData?.map((image, i) => (
+									{convertedData.images.map((image, i) => (
 										<ImageCard
 											id={image.slice(-10)}
-											prompt={inputs.prompt}
 											name={user.name}
+											prompt={inputs.prompt}
 											image={image}
 											key={image}
 										/>
 									))}
 								</div>
 								<div className='history__prompt'>
-									<p>{inputs.prompt}</p>
+									<p>{convertedData.prompt}</p>
 								</div>
 							</div>
 							<button onClick={(e) => reset(e)}>
@@ -162,20 +169,23 @@ const PromptBuilder = () => {
 								</TabList>
 								{categories.map((category, i) => (
 									<TabPanel key={category + i}>
-										{prompts?.map((prompt) => {
-											return prompt.category ===
-												category ? (
-												<PromptCard
-													key={prompt.prompt}
-													id={prompt.prompt}
-													title={prompt.prompt}
-													image={prompt.imgUrl}
-													handleClick={(e) =>
-														handleClick(prompt, e)
-													}
-												/>
-											) : (
-												<></>
+										{prompts.map((prompt) => {
+											return (
+												prompt.category ===
+													category && (
+													<PromptCard
+														key={prompt.prompt}
+														id={prompt.prompt}
+														title={prompt.prompt}
+														image={prompt.imgUrl}
+														handleClick={(e) =>
+															handleClick(
+																prompt,
+																e
+															)
+														}
+													/>
+												)
 											)
 										})}
 									</TabPanel>

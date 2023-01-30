@@ -4,7 +4,6 @@ export const fetchResults = async ({
 	inputs,
 	setImageData,
 	setImageRetrieved,
-	setIsLoading,
 }) => {
 	const response = await fetch('/api/dalle', {
 		method: 'POST',
@@ -28,7 +27,6 @@ export const fetchResults = async ({
 
 		setImageData(imageData)
 		setImageRetrieved(true)
-		setIsLoading(false)
 	} else {
 		const err = await response.text()
 		alert(err)

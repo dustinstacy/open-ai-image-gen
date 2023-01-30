@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const inititalState = {
@@ -73,19 +74,12 @@ export const GlobalProvider = ({ children }) => {
 			const res = await axios.get('/api/auth/current')
 
 			if (res.data) {
-				const promptHistoryRes = await axios('/api/history/current')
-
 				dispatch({
 					type: 'SET_USER',
 					payload: res.data,
 				})
 
-				if (promptHistoryRes.data) {
-					dispatch({
-						type: 'SET_HISTORY',
-						payload: promptHistoryRes.data,
-					})
-				}
+				getPromptHistory()
 			} else {
 				dispatch({ type: 'RESET_USER' })
 			}
@@ -95,10 +89,24 @@ export const GlobalProvider = ({ children }) => {
 		}
 	}
 
+	const getPromptHistory = async () => {
+		try {
+			const res = await axios.get('/api/history/current')
+
+			if (res.data) {
+				dispatch({
+					type: 'SET_HISTORY',
+					payload: res.data,
+				})
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	const logout = async () => {
 		try {
 			await axios.put('/api/auth/logout')
-
 			dispatch({ type: 'RESET_USER' })
 		} catch (error) {
 			console.log(error)
@@ -133,6 +141,7 @@ export const GlobalProvider = ({ children }) => {
 		...state,
 		getCurrentUser,
 		getPrompts,
+		getPromptHistory,
 		logout,
 		markHistoryFavorite,
 		removeHistoryFavorite,
