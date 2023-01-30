@@ -24,9 +24,9 @@ const History = () => {
 		setCurrentPage(pageNumber)
 	}
 
-	useEffect(() => {
-		getCurrentUser()
-	}, [])
+	// useEffect(() => {
+	// 	getCurrentUser()
+	// }, [])
 
 	const markFavorite = async (e, history) => {
 		e.preventDefault()

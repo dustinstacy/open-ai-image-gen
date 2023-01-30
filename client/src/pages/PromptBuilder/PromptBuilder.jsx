@@ -39,11 +39,11 @@ const PromptBuilder = () => {
 		'Quality & View',
 	]
 
-	useEffect(() => {
-		if (prompts.length === 0) {
-			getPrompts()
-		}
-	}, [prompts, getPrompts])
+	// useEffect(() => {
+	// 	if (prompts.length === 0) {
+	// 		getPrompts()
+	// 	}
+	// }, [prompts, getPrompts])
 
 	const handleFormFieldChange = (fieldName, e) => {
 		setInputs({ ...inputs, [fieldName]: e.target.value })
