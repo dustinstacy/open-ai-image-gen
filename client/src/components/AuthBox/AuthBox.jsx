@@ -18,10 +18,11 @@ const AuthBox = ({ register }) => {
 	const [errors, setErrors] = useState({})
 
 	useEffect(() => {
-		if (user) {
-			navigate('/')
+		if (user && navigate) {
+			getCurrentUser()
+			navigate('/home')
 		}
-	}, [user, navigate])
+	}, [user, navigate, getCurrentUser])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
