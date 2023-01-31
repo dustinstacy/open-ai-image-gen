@@ -10,7 +10,7 @@ import './AuthBox.scss'
 
 const AuthBox = ({ register }) => {
 	const navigate = useNavigate()
-	const { getCurrentUser, user } = useGlobalContext()
+	const { getCurrentUser, getPrompts, user } = useGlobalContext()
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -24,9 +24,10 @@ const AuthBox = ({ register }) => {
 	useEffect(() => {
 		if (user) {
 			getCurrentUser()
+			getPrompts()
 			navigate('/home')
 		}
-	}, [user, navigate, getCurrentUser])
+	}, [user, navigate, getCurrentUser, getPrompts])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
