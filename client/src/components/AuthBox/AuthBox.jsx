@@ -54,11 +54,11 @@ const AuthBox = ({ register }) => {
 			.post(
 				register
 					? 'https://prompt-builder.onrender.com/api/auth/register'
-					: '/api/auth/login',
+					: 'https://prompt-builder.onrender.com/api/auth/login',
 				data
 			)
 			.then(() => {
-				getCurrentUser()
+				navigate('/home')
 			})
 			.catch((error) => {
 				console.log(error)

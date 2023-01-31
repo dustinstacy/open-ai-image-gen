@@ -1,138 +1,140 @@
-import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import express from 'express'
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
-import User from "../models/User.js";
-import validateRegisterInput from "../validation/registerValidation.js";
-import requiresAuth from "../middleware/permissions.js";
+import User from '../models/User.js'
+import validateRegisterInput from '../validation/registerValidation.js'
+import requiresAuth from '../middleware/permissions.js'
 
-const router = express.Router();
+const router = express.Router()
 
 // @route GET /api/auth/test
 // @desc Test the auth route
 // @access Public
-router.get("/test", (req, res) => {
-  res.send("Auth route working");
-});
+router.get('/test', (req, res) => {
+	res.send('Auth route working')
+})
 
 // @route POSE /api/auth/register
 // @desc Create a new user
 // @access Public
-router.post("/register", async (req, res) => {
-  try {
-    const { errors, isValid } = validateRegisterInput(req.body);
+router.post('/register', async (req, res) => {
+	try {
+		const { errors, isValid } = validateRegisterInput(req.body)
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+		if (!isValid) {
+			return res.status(400).json(errors)
+		}
 
-    const existingEmail = await User.findOne({
-      email: new RegExp("^" + req.body.email + "$", "i"),
-    });
+		const existingEmail = await User.findOne({
+			email: new RegExp('^' + req.body.email + '$', 'i'),
+		})
 
-    if (existingEmail) {
-      return res.status(400).json({ error: "There is already a user with this email" });
-    }
+		if (existingEmail) {
+			return res
+				.status(400)
+				.json({ error: 'There is already a user with this email' })
+		}
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+		const hashedPassword = await bcrypt.hash(req.body.password, 12)
 
-    const newUser = new User({
-      email: req.body.email,
-      password: hashedPassword,
-      name: req.body.name,
-      permissions: req.body.permissions,
-    });
+		const newUser = new User({
+			email: req.body.email,
+			password: hashedPassword,
+			name: req.body.name,
+			permissions: req.body.permissions,
+		})
 
-    const savedUser = await newUser.save();
+		const savedUser = await newUser.save()
 
-    const payload = { userId: savedUser._id };
+		const payload = { userId: savedUser._id }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+		const token = jwt.sign(payload, process.env.JWT_SECRET, {
+			expiresIn: '7d',
+		})
 
-    res.cookie("access-token", token, {
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-    });
+		res.cookie('access-token', token, {
+			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+		})
 
-    const userToReturn = { ...savedUser._doc };
-    delete userToReturn.password;
+		const userToReturn = { ...savedUser._doc }
+		delete userToReturn.password
 
-    return res.json(userToReturn);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-});
+		return res.json(userToReturn)
+	} catch (error) {
+		console.log(error)
+		res.status(500).send(error.message)
+	}
+})
 
 // @route Post /api/auth/login
 // @desc Login user and return an access token
 // @access Public
-router.post("/login", async (req, res) => {
-  try {
-    const user = await User.findOne({
-      email: new RegExp("^" + req.body.email + "$", "i"),
-    });
+router.post('/login', async (req, res) => {
+	try {
+		const user = await User.findOne({
+			email: new RegExp('^' + req.body.email + '$', 'i'),
+		})
 
-    if (!user) {
-      return res.status(400).json({ error: "Invalid login credentials" });
-    }
+		if (!user) {
+			return res.status(400).json({ error: 'Invalid login credentials' })
+		}
 
-    const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+		const passwordMatch = await bcrypt.compare(
+			req.body.password,
+			user.password
+		)
 
-    if (!passwordMatch) {
-      return res.status(400).json({ error: "Invalid login credentials" });
-    }
+		if (!passwordMatch) {
+			return res.status(400).json({ error: 'Invalid login credentials' })
+		}
 
-    const payload = { userId: user._id };
+		const payload = { userId: user._id }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+		const token = jwt.sign(payload, process.env.JWT_SECRET, {
+			expiresIn: '7d',
+		})
 
-    res.cookie("access-token", token, {
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-    });
+		res.setHeader(`'Set-Cookie', 'token=${token}'`)
 
-    const userToReturn = { ...user._doc };
-    delete userToReturn.password;
+		const userToReturn = { ...user._doc }
+		delete userToReturn.password
 
-    return res.json({
-      token: token,
-      user: userToReturn,
-    });
-  } catch (error) {
-    return res.status(500).send(error.message);
-  }
-});
+		return res.json({
+			token: token,
+			user: userToReturn,
+		})
+	} catch (error) {
+		return res.status(500).send(error.message)
+	}
+})
 
 // @route Get /api/auth/current
 // @desc Return currently authed user
 // @access Private
-router.get("/current", requiresAuth, (req, res) => {
-  if (!req.user) {
-    return res.status(401).send("Unauthorized");
-  }
+router.get('/current', requiresAuth, (req, res) => {
+	console.log(req)
+	if (!req.user) {
+		return res.status(401).send('Unauthorized')
+	}
 
-  return res.json(req.user);
-});
+	return res.json(req.user)
+})
 
 // @route Put /api/auth/logout
 // @desc Logout user and clear the cookie
 // @access Private
-router.put("/logout", requiresAuth, async (req, res) => {
-  try {
-    res.clearCookie("access-token");
+router.put('/logout', requiresAuth, async (req, res) => {
+	try {
+		res.clearCookie('access-token')
 
-    return res.json({ success: true });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send(error.message);
-  }
-});
+		return res.json({ success: true })
+	} catch (error) {
+		console.log(error)
+		return res.status(500).send(error.message)
+	}
+})
 
-export default router;
+export default router
