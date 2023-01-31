@@ -3,7 +3,6 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
-import session from 'express-session'
 
 import authRoute from './routes/auth.js'
 import historyRoute from './routes/history.js'
@@ -27,17 +26,6 @@ app.use('/api/auth', authRoute)
 app.use('/api/history', historyRoute)
 app.use('/api/prompts', promptsRoute)
 app.use('/api/dalle', dalleRoute)
-app.use(
-	session({
-		secret: 'test secret', // change this!
-		resave: true,
-		saveUninitialized: false,
-		cookie: {
-			sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // must be 'none' to enable cross-site delivery
-			secure: process.env.NODE_ENV === 'production', // must be true if sameSite='none'
-		},
-	})
-)
 
 mongoose.set('strictQuery', true)
 

@@ -58,6 +58,7 @@ router.post('/register', async (req, res) => {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			domain: 'https://prompt-builder.netlify.app/',
+			sameSite: 'none',
 		})
 
 		const userToReturn = { ...savedUser._doc }
