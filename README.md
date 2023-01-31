@@ -1,6 +1,6 @@
 # open-ai-image-gen
 
-https://promptbuilder.vercel.app/
+https://prompt-builder.herokuapp.com/
 
 deployed at the above URL 👆
 
