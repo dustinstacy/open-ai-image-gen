@@ -48,11 +48,11 @@ const GlobalContext = createContext(inititalState)
 export const GlobalProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(globalReducer, inititalState)
 
-	useEffect(() => {
-		getCurrentUser()
-		getPrompts()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	// useEffect(() => {
+	// 	getCurrentUser()
+	// 	getPrompts()
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [])
 
 	const getPrompts = async () => {
 		try {

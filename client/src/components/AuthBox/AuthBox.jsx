@@ -54,7 +54,7 @@ const AuthBox = ({ register }) => {
 			.post(
 				register
 					? 'https://prompt-builder.onrender.com/api/auth/register'
-					: 'https://prompt-builder.onrender.com/api/auth/login',
+					: '/api/auth/login',
 				data
 			)
 			.then(() => {
