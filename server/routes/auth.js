@@ -97,7 +97,7 @@ router.post('/login', async (req, res) => {
 			expiresIn: '7d',
 		})
 
-		res.set('Headers', 'withCredentials=true')
+		res.set('Set-Cookie', `access-token=${token}`)
 		res.cookie('access-token', token)
 
 		const userToReturn = { ...user._doc }
