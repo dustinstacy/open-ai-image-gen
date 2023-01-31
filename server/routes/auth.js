@@ -57,6 +57,7 @@ router.post('/register', async (req, res) => {
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
+			domain: 'https://prompt-builder.netlify.app/',
 		})
 
 		const userToReturn = { ...savedUser._doc }
