@@ -51,7 +51,12 @@ const AuthBox = ({ register }) => {
 		}
 
 		axios
-			.post(register ? '/api/auth/register' : '/api/auth/login', data)
+			.post(
+				register
+					? 'https://prompt-builder.onrender.com/api/auth/register'
+					: 'https://prompt-builder.onrender.com/api/auth/login',
+				data
+			)
 			.then(() => {
 				getCurrentUser()
 			})

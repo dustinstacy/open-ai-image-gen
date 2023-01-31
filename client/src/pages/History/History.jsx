@@ -26,13 +26,17 @@ const History = () => {
 
 	const markFavorite = async (e, history) => {
 		e.preventDefault()
-		axios.put(`/api/history/${history._id}/favorite`)
+		axios.put(
+			`https://prompt-builder.onrender.com/api/history/${history._id}/favorite`
+		)
 		getCurrentUser()
 	}
 
 	const removeFavorite = async (e, history) => {
 		e.preventDefault()
-		axios.put(`/api/history/${history._id}/removeFavorite`)
+		axios.put(
+			`https://prompt-builder.onrender.com/api/history/${history._id}/removeFavorite`
+		)
 		getCurrentUser()
 	}
 

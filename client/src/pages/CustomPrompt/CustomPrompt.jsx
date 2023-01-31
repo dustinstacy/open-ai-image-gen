@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -45,7 +44,7 @@ const CustomPrompt = () => {
 		if (user && imageRetrieved) {
 			setImageRetrieved(false)
 			axios
-				.post('/api/history/new', {
+				.post('https://prompt-builder.onrender.com/api/history/new', {
 					user: user._id,
 					name: user.name,
 					prompt: inputs.prompt,

@@ -16,7 +16,9 @@ const NavBar = () => {
 
 	return (
 		<div className='navbar'>
-			<img src={logo} alt='logo' />
+			<NavLink to='/home'>
+				<img src={logo} alt='logo' />
+			</NavLink>
 			<div className='navbar__links'>
 				{user &&
 					navlinks.map((link) => (
