@@ -73,9 +73,7 @@ export const GlobalProvider = ({ children }) => {
 
 	const getCurrentUser = async () => {
 		try {
-			const res = await axios.get(
-				'https://prompt-builder.onrender.com/api/auth/current'
-			)
+			const res = await axios.get('/api/auth/current')
 
 			if (res.data) {
 				dispatch({
