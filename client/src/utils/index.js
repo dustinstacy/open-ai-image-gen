@@ -5,17 +5,20 @@ export const fetchResults = async ({
 	setImageData,
 	setImageRetrieved,
 }) => {
-	const response = await fetch('/api/dalle', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			prompt: inputs.prompt,
-			count: inputs.count,
-			size: inputs.size,
-		}),
-	})
+	const response = await fetch(
+		'https://prompt-builder.onrender.com/api/dalle',
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				prompt: inputs.prompt,
+				count: inputs.count,
+				size: inputs.size,
+			}),
+		}
+	)
 
 	if (response.ok) {
 		const resData = await response.json()

@@ -56,7 +56,9 @@ export const GlobalProvider = ({ children }) => {
 
 	const getPrompts = async () => {
 		try {
-			const res = await axios.get('/api/prompts')
+			const res = await axios.get(
+				'https://prompt-builder.onrender.com/api/prompts'
+			)
 
 			if (res.data) {
 				dispatch({
@@ -71,7 +73,9 @@ export const GlobalProvider = ({ children }) => {
 
 	const getCurrentUser = async () => {
 		try {
-			const res = await axios.get('/api/auth/current')
+			const res = await axios.get(
+				'https://prompt-builder.onrender.com/api/auth/current'
+			)
 
 			if (res.data) {
 				dispatch({
@@ -91,7 +95,9 @@ export const GlobalProvider = ({ children }) => {
 
 	const getPromptHistory = async () => {
 		try {
-			const res = await axios.get('/api/history/current')
+			const res = await axios.get(
+				'https://prompt-builder.onrender.com/api/history/current'
+			)
 
 			if (res.data) {
 				dispatch({
@@ -106,7 +112,9 @@ export const GlobalProvider = ({ children }) => {
 
 	const logout = async () => {
 		try {
-			await axios.put('/api/auth/logout')
+			await axios.put(
+				'https://prompt-builder.onrender.com/api/auth/logout'
+			)
 			dispatch({ type: 'RESET_USER' })
 		} catch (error) {
 			console.log(error)
