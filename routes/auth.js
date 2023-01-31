@@ -57,8 +57,6 @@ router.post('/register', async (req, res) => {
 			expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
-			domain: 'https://prompt-builder.netlify.app/',
-			sameSite: 'none',
 		})
 
 		const userToReturn = { ...savedUser._doc }
@@ -99,7 +97,6 @@ router.post('/login', async (req, res) => {
 			expiresIn: '7d',
 		})
 
-		res.set('Set-Cookie', `access-token=${token}`)
 		res.cookie('access-token', token)
 
 		const userToReturn = { ...user._doc }
@@ -118,7 +115,6 @@ router.post('/login', async (req, res) => {
 // @desc Return currently authed user
 // @access Private
 router.get('/current', requiresAuth, (req, res) => {
-	console.log(req)
 	if (!req.user) {
 		return res.status(401).send('Unauthorized')
 	}

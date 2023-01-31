@@ -51,20 +51,13 @@ const AuthBox = ({ register }) => {
 		}
 
 		axios
-			.post(
-				register
-					? 'https://prompt-builder.onrender.com/api/auth/register'
-					: 'https://prompt-builder.onrender.com/api/auth/login',
-				data
-			)
+			.post(register ? '/api/auth/register' : '/api/auth/login', data)
 			.then(() => {
-				navigate('/home')
+				getCurrentUser()
 			})
 			.catch((error) => {
-				console.log(error)
 				setLoading(false)
 				if (error?.response?.data) {
-					console.log(error)
 					setErrors(error.response.data)
 				}
 			})

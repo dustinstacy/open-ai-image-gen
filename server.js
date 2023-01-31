@@ -3,29 +3,35 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
 
 import authRoute from './routes/auth.js'
 import historyRoute from './routes/history.js'
 import promptsRoute from './routes/prompts.js'
 import dalleRoute from './routes/dalle.js'
+import { dir } from 'console'
 
 dotenv.config()
 
 const app = express()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: '50mb' }))
-app.use(
-	cors({
-		credentials: true,
-		origin: process.env.FRONT_END_APP_URL,
-	})
-)
+app.use(cors())
 app.use(cookieParser())
 app.use('/api/auth', authRoute)
 app.use('/api/history', historyRoute)
 app.use('/api/prompts', promptsRoute)
 app.use('/api/dalle', dalleRoute)
+app.use(express.static(path.resolve(__dirname, './client/build')))
+
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, './client/build', 'index.html'))
+})
 
 mongoose.set('strictQuery', true)
 
