@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 
 const requiresAuth = async (req, res, next) => {
 	const token = req.cookies['access-token']
-	res.send(req, token, 'requiresAuth')
 	let isAuthed = false
 
 	if (token) {

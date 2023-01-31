@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 import { navlinks } from '../../constants'
 import { Footer } from '../../components'
+
 import './Home.scss'
 
 const NavCard = ({ link }) => (
