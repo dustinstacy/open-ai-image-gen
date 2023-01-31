@@ -4,6 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 import authRoute from './routes/auth.js'
 import historyRoute from './routes/history.js'
@@ -13,6 +14,8 @@ import dalleRoute from './routes/dalle.js'
 dotenv.config()
 
 const app = express()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: '50mb' }))
