@@ -97,7 +97,7 @@ router.post('/login', async (req, res) => {
 			expiresIn: '7d',
 		})
 
-		res.setHeader(`'Set-Cookie', 'token=${token}'`)
+		res.cookie('access-token', token)
 
 		const userToReturn = { ...user._doc }
 		delete userToReturn.password
