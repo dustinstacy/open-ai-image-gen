@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react'
+import React, { createContext, useContext, useReducer } from 'react'
 import axios from 'axios'
 
 const inititalState = {
@@ -73,7 +73,9 @@ export const GlobalProvider = ({ children }) => {
 
 	const getCurrentUser = async () => {
 		try {
-			const res = await axios.get('/api/auth/current')
+			const res = await axios.get(
+				'https://prompt-builder.onrender.com/api/auth/current'
+			)
 
 			if (res.data) {
 				dispatch({

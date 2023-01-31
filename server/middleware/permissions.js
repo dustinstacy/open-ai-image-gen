@@ -1,36 +1,37 @@
-import User from "../models/User.js";
-import jwt from "jsonwebtoken";
+import User from '../models/User.js'
+import jwt from 'jsonwebtoken'
 
 const requiresAuth = async (req, res, next) => {
-  const token = req.cookies["access-token"];
-  let isAuthed = false;
+	const token = req.cookies['access-token']
+	res.send(req, token, 'requiresAuth')
+	let isAuthed = false
 
-  if (token) {
-    try {
-      const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+	if (token) {
+		try {
+			const { userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-      try {
-        const user = await User.findById(userId);
+			try {
+				const user = await User.findById(userId)
 
-        if (user) {
-          const userToReturn = { ...user._doc };
-          delete userToReturn.password;
-          req.user = userToReturn;
-          isAuthed = true;
-        }
-      } catch {
-        isAuthed = false;
-      }
-    } catch {
-      isAuthed = false;
-    }
-  }
+				if (user) {
+					const userToReturn = { ...user._doc }
+					delete userToReturn.password
+					req.user = userToReturn
+					isAuthed = true
+				}
+			} catch {
+				isAuthed = false
+			}
+		} catch {
+			isAuthed = false
+		}
+	}
 
-  if (isAuthed) {
-    return next();
-  } else {
-    return res.status(401).send("Unauthorized");
-  }
-};
+	if (isAuthed) {
+		return next()
+	} else {
+		return res.status(401).send('Unauthorized')
+	}
+}
 
-export default requiresAuth;
+export default requiresAuth
