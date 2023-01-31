@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
+import session from 'express-session'
 
 import authRoute from './routes/auth.js'
 import historyRoute from './routes/history.js'
@@ -28,7 +29,7 @@ app.use('/api/prompts', promptsRoute)
 app.use('/api/dalle', dalleRoute)
 app.use(
 	session({
-		secret: process.env.SESSION_SECRET || 'Super Secret (change it)',
+		secret: 'test secret', // change this!
 		resave: true,
 		saveUninitialized: false,
 		cookie: {
