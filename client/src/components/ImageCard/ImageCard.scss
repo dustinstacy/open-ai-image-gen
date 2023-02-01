@@ -37,6 +37,8 @@
 		}
 
 		&__middle {
+			display: flex;
+			gap: 2vw;
 			font-size: 3vw;
 
 			.option {

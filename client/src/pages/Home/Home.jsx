@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
 
 import { navlinks } from '../../constants'
 import { Footer } from '../../components'
+import { sendPrompts } from '../Admin'
 
 import './Home.scss'
 
@@ -14,6 +16,10 @@ const NavCard = ({ link }) => (
 )
 
 const Home = () => {
+	// useEffect(() => {
+	// 	sendPrompts()
+	// }, [])
+
 	return (
 		<div className='home__container'>
 			<div className='navcards'>

@@ -33,6 +33,40 @@ export const fetchResults = async ({
 	}
 }
 
+export const fetchVariants = async ({
+	image,
+	inputs,
+	setImageData,
+	setImageRetrieved,
+}) => {
+	const response = await fetch('/api/dalle/variants', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			image: image,
+			count: inputs.count,
+			size: inputs.size,
+		}),
+	})
+
+	if (response.ok) {
+		const resData = await response.json()
+		const imageData = []
+
+		resData.images.data.forEach((image) => {
+			imageData.push(image.url)
+		})
+
+		setImageData(imageData)
+		setImageRetrieved(true)
+	} else {
+		const err = await response.text()
+		alert(err)
+	}
+}
+
 export const sizeConversion = ({ inputs }) => {
 	if (inputs.size === '1') {
 		inputs.size = '256x256'
