@@ -16,9 +16,9 @@ const NavCard = ({ link }) => (
 )
 
 const Home = () => {
-	// useEffect(() => {
-	// 	sendPrompts()
-	// }, [])
+	useEffect(() => {
+		sendPrompts()
+	}, [])
 
 	return (
 		<div className='home__container'>
