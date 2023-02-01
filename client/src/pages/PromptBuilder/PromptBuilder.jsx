@@ -11,7 +11,12 @@ import {
 	ImageCard,
 	Footer,
 } from '../../components'
-import { sizeConversion, integerConversion, fetchResults } from '../../utils'
+import {
+	sizeConversion,
+	integerConversion,
+	fetchResults,
+	fetchVariants,
+} from '../../utils'
 import { useGlobalContext } from '../../context/GlobalContext'
 
 import './PromptBuilder.scss'
@@ -31,13 +36,13 @@ const PromptBuilder = () => {
 
 	const promptBuild = selectedPrompts.join(' ')
 	const categories = [
-		'Subjects',
-		'Environment',
-		'Detail',
+		'Subject',
+		'Action',
+		'Object',
+		'Mood',
+		'Setting',
 		'Style',
-		'Artists',
-		'Lighting',
-		'Quality & View',
+		'Detail',
 	]
 
 	const handleFormFieldChange = (fieldName, e) => {
@@ -87,6 +92,22 @@ const PromptBuilder = () => {
 		}
 	}, [selectedPrompts, inputs, promptBuild])
 
+	const surpriseMe = (e) => {
+		const randomPrompts = []
+		categories.forEach((category) => {
+			const newArray = []
+			prompts.forEach((prompt) => {
+				if (prompt.category === category) {
+					newArray.push(prompt.prompt)
+				}
+			})
+			const randomPrompt = newArray[Math.floor(Math.random() * newArray.length)]
+			randomPrompts.push(randomPrompt)
+		})
+		console.log(randomPrompts)
+		setSelectedPrompts(randomPrompts)
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		setImageData(null)
@@ -96,6 +117,24 @@ const PromptBuilder = () => {
 		integerConversion({ inputs })
 		sizeConversion({ inputs })
 		fetchResults({ inputs, setImageData, setImageRetrieved, setIsLoading })
+	}
+
+	const handleVariants = async (image, e) => {
+		console.log('clicked')
+		e.preventDefault()
+		setImageData(null)
+		setImageRetrieved(false)
+		setConvertedData(null)
+		setIsLoading(true)
+		integerConversion({ inputs })
+		sizeConversion({ inputs })
+		fetchVariants({
+			inputs,
+			image,
+			setImageData,
+			setImageRetrieved,
+			setIsLoading,
+		})
 	}
 
 	useEffect(() => {
@@ -128,12 +167,13 @@ const PromptBuilder = () => {
 						<div className='results__container'>
 							<div className='history__collection'>
 								<div className='history__images'>
-									{convertedData.images.map((image, i) => (
+									{convertedData.images.map((image) => (
 										<ImageCard
 											id={image.slice(-10)}
 											name={user.name}
 											prompt={inputs.prompt}
 											image={image}
+											handleVariants={(e) => handleVariants(image, e)}
 											key={image}
 										/>
 									))}
@@ -142,9 +182,7 @@ const PromptBuilder = () => {
 									<p>{convertedData.prompt}</p>
 								</div>
 							</div>
-							<button onClick={(e) => reset(e)}>
-								Try again?
-							</button>
+							<button onClick={(e) => reset(e)}>Try again?</button>
 							<Footer />
 						</div>
 					)}
@@ -165,19 +203,13 @@ const PromptBuilder = () => {
 									<TabPanel key={category + i}>
 										{prompts.map((prompt) => {
 											return (
-												prompt.category ===
-													category && (
+												prompt.category === category && (
 													<PromptCard
 														key={prompt.prompt}
 														id={prompt.prompt}
 														title={prompt.prompt}
 														image={prompt.imgUrl}
-														handleClick={(e) =>
-															handleClick(
-																prompt,
-																e
-															)
-														}
+														handleClick={(e) => handleClick(prompt, e)}
 													/>
 												)
 											)
@@ -197,19 +229,24 @@ const PromptBuilder = () => {
 							</div>
 							<div className='prompt__collector'>
 								<h2>Prompt Collector</h2>
-								<ul className='selected__prompts'>
-									{selectedPrompts?.map((prompt) => (
-										<li key={prompt} className='prompt'>
-											{prompt}
-											<CgCloseR
-												className='delete'
-												onClick={(e) =>
-													handleClick(prompt, e)
-												}
-											/>
-										</li>
-									))}
-								</ul>
+								{selectedPrompts.length > 0 ? (
+									<ul className='selected__prompts'>
+										{selectedPrompts?.map((prompt) => (
+											<li key={prompt} className='prompt'>
+												{prompt}
+												<CgCloseR
+													className='delete'
+													onClick={(e) => handleClick(prompt, e)}
+												/>
+											</li>
+										))}
+									</ul>
+								) : (
+									<button key={'button'} onClick={(e) => surpriseMe(e)}>
+										Suprise Me!
+									</button>
+								)}
+
 								<div className='options'>
 									<div className='options__prompt'>
 										<label>Add your own prompt:</label>
@@ -222,20 +259,15 @@ const PromptBuilder = () => {
 										<button
 											type='button'
 											className='add'
-											onClick={() => addCustomPrompt()}>
+											onClick={() => addCustomPrompt()}
+										>
 											+
 										</button>
 									</div>
 									<div className='options__inputs'>
-										<ResultsCount
-											handleChange={handleFormFieldChange}
-										/>
-										<SizeSlider
-											handleChange={handleFormFieldChange}
-										/>
-										<button
-											type='button'
-											onClick={(e) => handleSubmit(e)}>
+										<ResultsCount handleChange={handleFormFieldChange} />
+										<SizeSlider handleChange={handleFormFieldChange} />
+										<button type='button' onClick={(e) => handleSubmit(e)}>
 											Generate
 										</button>
 									</div>
