@@ -15,7 +15,7 @@ router.get('/test', (req, res) => {
 	res.send('Auth route working')
 })
 
-// @route POSE /api/auth/register
+// @route POST /api/auth/register
 // @desc Create a new user
 // @access Public
 router.post('/register', async (req, res) => {

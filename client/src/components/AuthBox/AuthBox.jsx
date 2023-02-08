@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 import axios from 'axios'
@@ -10,7 +10,7 @@ import './AuthBox.scss'
 
 const AuthBox = ({ register }) => {
 	const navigate = useNavigate()
-	const { getCurrentUser, getPrompts, user } = useGlobalContext()
+	const { getCurrentUser, getPrompts } = useGlobalContext()
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -20,14 +20,6 @@ const AuthBox = ({ register }) => {
 		useState(false)
 	const [loading, setLoading] = useState(false)
 	const [errors, setErrors] = useState({})
-
-	useEffect(() => {
-		if (user) {
-			getCurrentUser()
-			getPrompts()
-			navigate('/home')
-		}
-	}, [user, navigate, getCurrentUser, getPrompts])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -50,11 +42,12 @@ const AuthBox = ({ register }) => {
 				password,
 			}
 		}
-
 		axios
 			.post(register ? '/api/auth/register' : '/api/auth/login', data)
 			.then(() => {
 				getCurrentUser()
+				getPrompts()
+				navigate('/home')
 			})
 			.catch((error) => {
 				setLoading(false)

@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
 import { GlobalProvider } from './context/GlobalContext'
 import { CustomPrompt, PromptBuilder, Home, History } from './pages'
 import { AuthBox, NavBar } from './components'

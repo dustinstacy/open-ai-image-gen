@@ -11,7 +11,6 @@ import authRoute from './routes/auth.js'
 import historyRoute from './routes/history.js'
 import promptsRoute from './routes/prompts.js'
 import dalleRoute from './routes/dalle.js'
-import { dir } from 'console'
 
 dotenv.config()
 
